@@ -5,59 +5,108 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: felayan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 23:20:31 by felayan           #+#    #+#             */
-/*   Updated: 2024/09/12 00:29:55 by felayan          ###   ########.fr       */
+/*   Created: 2024/09/14 03:09:21 by felayan           #+#    #+#             */
+/*   Updated: 2024/09/14 03:43:29 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*#include "libft.h"
+#include "libft.h"
 
-size_t wc(const char *s, char c)
+int	wc(const char *s, char d)
 {
-	size_t i = 0;
-	size_t co = 0;
+	int	count;
+	int	i;
 
-	while (s[i] != '\0')
+	i = 0;
+	count = 0;
+	if (d == 0 && s[0] != 0)
+		return (1);
+	while (s[i])
 	{
-		if (s[i] != c && (i == 0 || s[i - 1] == c))
-			co++;
+		if (s[i] != d && (i == 0 || s[i - 1] == d))
+			count++;
 		i++;
 	}
-	return (co);
+	return (count);
 }
 
-size_t	check(const char *s, char c)
+int	loc(char **strs, int pos, int len)
 {
-	size_t	i;
-	size_t	res;
+	int	i;
 
-	res = 0;
 	i = 0;
-	while (s[i] != '\0')
+	strs[pos] = malloc(len + 1);
+	if (!strs[pos])
 	{
-		if (s[i] == c)
+		while (i <= pos)
 		{
-			res = 1;
-			break ;
+			free(strs[i]);
+			i++;
+		}
+		free(strs);
+		return (1);
+	}
+	return (0);
+}
+
+int	fill(char **strs, const char *s, char d)
+{
+	int	i;
+	int	len;
+	int	j;
+
+	j = 0;
+	i = 0;
+	while (s[j])
+	{
+		len = 0;
+		while (s[j] == d && s[j])
+			j++;
+		while (s[j] != d && s[j])
+		{
+			len++;
+			j++;
+		}
+		if (len)
+		{
+			if (loc(strs, i, len))
+				return (1);
+			ft_strlcpy(strs[i], &s[j - len], len + 1);
 		}
 		i++;
 	}
-	return (res);
+	return (0);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_split(const char *s, char d)
 {
-	char	**sp;
-	size_t	i;
+	int		words;
+	char	**strs;
 
-	i = 0;
-	if(!s || !check(s, c))
-		return (NULL);
-	sp = malloc(wc(s,c) * sizeof(sp) + 1);
-	if (!sp)
-		return (NULL);
-	while (s[i] != '\0')
+	words = wc(s, d);
+	if (!s || !words)
 	{
-		if (s[i] == c)
-		{
-			sp[j] = malloc
+		strs = malloc(sizeof(strs));
+		if (!strs)
+			return (NULL);
+		strs[0] = 0;
+		return (strs);
+	}
+	strs = malloc((words + 1) * sizeof(strs));
+	if (!strs)
+		return (NULL);
+	strs[words] = NULL;
+	if (fill(strs, s, d))
+		return (NULL);
+	return (strs);
+}
+/*
+#include <stdio.h>
+int main()
+{
+	char *s = "      split       this for   me  !       ";
+	char d = ' ';
+	int i = 0;
+	char **sp = ft_split(s, d);
+	while(sp[i])
+		printf("%s\n", sp[i++]);
 }*/

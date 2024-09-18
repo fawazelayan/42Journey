@@ -6,7 +6,7 @@
 /*   By: felayan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 16:10:09 by felayan           #+#    #+#             */
-/*   Updated: 2024/09/12 02:43:23 by felayan          ###   ########.fr       */
+/*   Updated: 2024/09/14 03:44:16 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -22,7 +22,9 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	if (start >= lens || len == 0)
 	{
 		sub = malloc(1);
-		sub[0] = '\0';
+		if (!sub)
+			return (NULL);
+		sub[0] = 0;
 		return (sub);
 	}
 	sub = malloc(len + 1);

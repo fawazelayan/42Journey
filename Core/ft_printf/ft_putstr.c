@@ -6,7 +6,7 @@
 /*   By: felayan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 21:33:53 by felayan           #+#    #+#             */
-/*   Updated: 2024/09/19 05:03:19 by felayan          ###   ########.fr       */
+/*   Updated: 2024/09/19 20:27:20 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -15,6 +15,8 @@ int	put_s(char *s)
 {
 	int	i;
 
+	if (!s)
+		return (write(1, "(null)", 6));
 	i = 0;
 	while (s[i])
 		i++;

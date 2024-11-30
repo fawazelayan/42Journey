@@ -6,12 +6,12 @@
 /*   By: felayan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 22:10:56 by felayan           #+#    #+#             */
-/*   Updated: 2024/09/19 05:39:26 by felayan          ###   ########.fr       */
+/*   Updated: 2024/11/29 22:34:45 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int	numl(unsigned long n)
+int	num_len(unsigned long n)
 {
 	int	len;
 
@@ -24,22 +24,15 @@ int	numl(unsigned long n)
 	return (len);
 }
 
-int	put_x(unsigned long n, char *base)
+int	fillh(char *s, unsigned long n, char *base)
 {
-	char	*s;
-	int		len;
-	int		count;
+	int	len;
+	int	count;
 
-	if (n == 0)
-	{
-		put_s("0");
-		return (1);
-	}
 	count = 0;
-	len = numl(n);
-	s = malloc(len + 1);
-	if (!s)
-		return (0);
+	if (n == 0)
+		return (put_c('0'));
+	len = num_len(n);
 	s[len] = '\0';
 	while (n)
 	{
@@ -47,48 +40,22 @@ int	put_x(unsigned long n, char *base)
 		n /= 16;
 	}
 	count += put_s(s);
-	free(s);
-	return (count);
-}
-
-int	put_xx(unsigned long n, char *base)
-{
-	char	*s;
-	int		len;
-	int		count;
-
-	if (n == 0)
-	{
-		put_s("0");
-		return (1);
-	}
-	count = 0;
-	len = numl(n);
-	s = malloc(len + 1);
-	if (!s)
-		return (0);
-	s[len] = '\0';
-	while (n)
-	{
-		s[--len] = base[n % 16];
-		n /= 16;
-	}
-	count += put_s(s);
-	free(s);
 	return (count);
 }
 
 int	put_hex(unsigned long n, char c)
 {
-	char	*base_x;
-	char	*base_xx;
+	char	*base_cap;
+	char	*base_sma;
+	char	s[18];
 	int		count;
 
-	base_x = "0123456789abcdef";
-	base_xx = "0123456789ABCDEF";
+	count = 0;
+	base_sma = "0123456789abcdef";
+	base_cap = "0123456789ABCDEF";
 	if (c == 'x')
-		count = put_x(n, base_x);
-	else if (c == 'X')
-		count = put_xx(n, base_xx);
+		count += fillh(s, n, base_sma);
+	else
+		count += fillh(s, n, base_cap);
 	return (count);
 }

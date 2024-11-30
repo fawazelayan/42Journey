@@ -6,12 +6,12 @@
 /*   By: felayan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 21:36:14 by felayan           #+#    #+#             */
-/*   Updated: 2024/09/19 05:03:27 by felayan          ###   ########.fr       */
+/*   Updated: 2024/11/29 20:14:16 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
-int	num_len(long n)
+int	numlen(long n)
 {
 	int	len;
 
@@ -30,7 +30,7 @@ void	fill(char *s, long n)
 {
 	int	len;
 
-	len = num_len(n);
+	len = numlen(n);
 	s[len] = '\0';
 	if (n == 0)
 		s[0] = '0';

@@ -6,7 +6,7 @@
 /*   By: felayan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 21:31:52 by felayan           #+#    #+#             */
-/*   Updated: 2024/09/19 05:39:43 by felayan          ###   ########.fr       */
+/*   Updated: 2024/11/30 17:45:22 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdarg.h>
-# include <stdlib.h>
 
 int	ft_printf(const char *fmt, ...);
 int	put_c(char c);

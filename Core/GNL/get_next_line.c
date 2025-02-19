@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
-static void	reading(int fd, char **rem, char *buf)
+void	reading(int fd, char **rem, char *buf)
 {
 	char	*tmp;
 	int		bytesread;
@@ -27,25 +28,27 @@ static void	reading(int fd, char **rem, char *buf)
 			*rem = NULL;
 			return ;
 		}
-		buf[bytesread] = 0;
 		if (bytesread == 0)
-			break ;
+			return ;
+		buf[bytesread] = 0;
 		if (!*rem)
 			*rem = ft_strdup("");
 		tmp = *rem;
 		*rem = ft_strjoin(tmp, buf);
 		free (tmp);
 		if (ft_strchr(buf, '\n'))
-			break ;
+			return ;
 	}
 }
 
-static char	*extract(const char *rem)
+char	*extract(const char *rem)
 {
 	int		len;
 	int		i;
 	char	*line;
 
+	if (!rem)
+		return (NULL);
 	i = 0;
 	len = lentonew(rem);
 	line = malloc(len + 1);
@@ -56,33 +59,35 @@ static char	*extract(const char *rem)
 		line[i] = rem[i];
 		i++;
 	}
-	line[i] = 0;
+	line[len] = 0;
 	return (line);
 }
 
-static char	*set_next_line(char *rem)
+void	set_next_line(char **rem)
 {
 	char	*new_pos;
 	char	*tmp;
 
-	new_pos = ft_strchr(rem, '\n');
+	if (!rem || !*rem)
+		return ;
+	new_pos = ft_strchr(*rem, '\n');
 	if (new_pos)
 	{
 		tmp = ft_strdup(new_pos + 1);
 		if (!tmp)
 		{
-			free(rem);
-			return (NULL);
+			free(*rem);
+			*rem = NULL;
+			return ;
 		}
-		free(rem);
-		rem = tmp;
+		free(*rem);
+		*rem = tmp;
 	}
 	else
 	{
-		free(rem);
-		rem = NULL;
+		free(*rem);
+		*rem = NULL;
 	}
-	return (rem);
 }
 
 char	*get_next_line(int fd)
@@ -110,6 +115,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = extract(remain);
-	remain = set_next_line(remain);
+	set_next_line(&remain);
 	return (line);
 }

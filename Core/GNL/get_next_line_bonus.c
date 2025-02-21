@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: felayan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/19 14:47:02 by felayan           #+#    #+#             */
-/*   Updated: 2025/02/19 14:50:54 by felayan          ###   ########.fr       */
+/*   Created: 2025/02/19 15:43:05 by felayan           #+#    #+#             */
+/*   Updated: 2025/02/19 15:43:06 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*freeing1(char **s)
 {
@@ -91,23 +91,23 @@ void	set_next_line(char **rem)
 
 char	*get_next_line(int fd)
 {
-	static char	*remain;
+	static char	*remain[1024];
 	char		*buf;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (freeing1(&remain));
+		return (freeing1(&remain[fd]));
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
-	reading(fd, &remain, buf);
+	reading(fd, &remain[fd], buf);
 	free(buf);
 	buf = NULL;
-	if (!remain || !*remain)
-		return (freeing1(&remain));
-	line = extract(remain);
+	if (!remain[fd] || !*remain[fd])
+		return (freeing1(&remain[fd]));
+	line = extract(remain[fd]);
 	if (!line)
-		return (freeing1(&remain));
-	set_next_line(&remain);
+		return (freeing1(&remain[fd]));
+	set_next_line(&remain[fd]);
 	return (line);
 }

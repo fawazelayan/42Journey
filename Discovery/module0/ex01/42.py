@@ -1,0 +1,1 @@
+print("\nNumber: 42\n")

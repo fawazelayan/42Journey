@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
 
-word = input("Give me a word: ")
-print(word.upper())
-print(word)
+word = input("\nGive me a word: ")
+print(f"\nOriginal word: {word}")
+print(f"Upcased word: {word.upper()}\n")

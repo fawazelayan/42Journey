@@ -21,9 +21,9 @@ CFLAGS		=	-Wall -Werror -Wextra -I$(LIBFT_DR) -I$(PRINTF_DR) -I$(INC_DR)
 LIBFT		=	$(LIBFT_DR)/libft.a
 PRINTF		=	$(PRINTF_DR)/libftprintf.a
 
-all			:	$(EXE_DR) $(LIBFT) $(PRINTF) $(NAME_C) $(NAME_S) 
+all		:	$(EXE_DR) $(LIBFT) $(PRINTF) $(NAME_C) $(NAME_S) 
 
-%.o 		:	%.c
+%.o			:	%.c
 	@echo "\033[0;35mCompiling $<...\033[0m"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -59,6 +59,6 @@ fclean		:	clean
 	@make -s -C $(LIBFT_DR) fclean
 	@make -s -C $(PRINTF_DR) fclean
 
-re			:	fclean all
+re		:	fclean all
 
 .PHONY		:	all clean fclean re

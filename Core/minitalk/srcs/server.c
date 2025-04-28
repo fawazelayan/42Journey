@@ -12,78 +12,57 @@
 
 #include "../inc/minitalk.h"
 
-void	display_and_clean(char **message)
+int	display(char char_received)
 {
-	if (!message || !*message)
-		return ;
-	ft_printf("%s\n", *message);
-	free (*message);
-	*message = NULL;
-	ft_printf("Message has been received!\n");
-}
-
-int	make_message(char c)
-{
-	static char	*message = NULL;
-	char	*tmp;
-
-	tmp = NULL;
-	if (!message)
+	if (char_received)
 	{
-		message = ft_strdup(&c);
-		if (!message)
-		{
-			ft_putstr_fd("Failed to allocate message in server.c make_message().", 2);
-			return (1);
-		}
+		write(1, &char_received, 1);
+		return (0);
 	}
-	if (!c)
-		display_and_clean(&message);
 	else
-	{
-		tmp = message;
-		message = ft_strjoin(tmp, &c);
-		free(tmp);
-		tmp = NULL;
-		if (!message)
-		{
-			ft_putstr_fd("Failed to allocate contacenated message in server.c make_message().", 2);
-			return (1);
-		}
-	}
-	return (0);
+		write(1, "\n\n", 2);
+	return (1);
 }
 
-void	handle_signal(int signum)
+void	sigusr_handle(int signum, siginfo_t *info, void *context)
 {
-	static unsigned	char_received = 0;
-	static int		bits  = 0;
+	static char		char_received = 0;
+	static int		bits_shifted = 0;
+	static pid_t	client_pid = 0;
 
-	if (signum == SIGUSR2)
-		char_received |= (1 << bits);
-	bits++;
-	if (bits == 8)
+	(void)context;
+	if (!client_pid)
+		client_pid = info->si_pid;
+	if (signum == SIGUSR1)
+		char_received |= (1 << bits_shifted);
+	bits_shifted++;
+	if (bits_shifted == 8)
 	{
-		if (make_message(char_received))
+		if (display(char_received))
 		{
-			ft_putstr_fd("Failed to allocate message in server.c at handle_signal().", 2);
-			exit(1);
+			kill(client_pid, SIGUSR1);
+			client_pid = 0;
+			char_received = 0;
+			bits_shifted = 0;
+			return ;
 		}
-		bits = 0;
 		char_received = 0;
+		bits_shifted = 0;
 	}
+	kill(client_pid, SIGUSR2);
 }
 
 int	main(void)
 {
-	struct sigaction act;
+	struct sigaction	act;
 
-	act.sa_handler = &handle_signal;
+	ft_printf("\nServer is online and the PID is: [%d]\n\n", getpid());
+	act.sa_handler = NULL;
+	act.sa_sigaction = &sigusr_handle;
+	act.sa_flags = SA_SIGINFO;
 	sigemptyset(&act.sa_mask);
-	act.sa_flags = 0;
 	sigaction(SIGUSR1, &act, NULL);
 	sigaction(SIGUSR2, &act, NULL);
-	ft_printf("Server PID: %d\n", getpid());
 	while (1)
 		pause();
 	return (0);

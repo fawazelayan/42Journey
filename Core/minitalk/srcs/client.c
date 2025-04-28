@@ -10,40 +10,83 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minitalk.h"
+#include "minitalk.h"
 
-void	send_message(int pid, char char_sent)
+volatile sig_atomic_t	g_ack = 0;
+
+void	send_char(int pid, unsigned char char_sent)
 {
 	int	i;
 
 	i = 0;
 	while (i < 8)
 	{
+		g_ack = 0;
 		if ((char_sent >> i) & 1)
-			kill(pid, SIGUSR2);
-		else
 			kill(pid, SIGUSR1);
-		usleep(50);
+		else
+			kill(pid, SIGUSR2);
+		while (!g_ack)
+			usleep(50);
 		i++;
 	}
 }
-int	main(int argc, char **argv)
+
+void	encrypt_message(int pid, char *message)
 {
-	int	pid;
 	int	i;
 
 	i = 0;
-	pid = 0;
-	if (argc != 3)
+	while (message[i] != '\0')
 	{
-		ft_putstr_fd("Usage: ./client <PID> <Message>\n", 2);
-		exit (1);
-	}
-	pid = ft_atoi(argv[1]);
-	while (argv[2][i] != '\0')
-	{
-		send_message(pid, argv[2][i]);
+		send_char(pid, (unsigned char)message[i]);
 		i++;
 	}
-	send_message(pid, '\0');
+	send_char(pid, '\0');
+}
+
+void	check_pid(char *pid)
+{
+	int	i;
+
+	i = 0;
+	while (pid[i] != '\0')
+	{
+		if (!ft_isdigit(pid[i]))
+		{
+			ft_putstr_fd("\nError: PID is not a number.\n\n", 2);
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
+}
+
+void	ack_handle(int signum)
+{
+	if (signum == SIGUSR2)
+		g_ack = 1;
+	else
+		g_ack = 2;
+}
+
+int	main(int argc, char **argv)
+{
+	struct sigaction	act;
+
+	act.sa_handler = &ack_handle;
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = 0;
+	sigaction(SIGUSR1, &act, NULL);
+	sigaction(SIGUSR2, &act, NULL);
+	if (argc != 3)
+	{
+		ft_putstr_fd("\nError: Wrong number of arguments.", 2);
+		ft_putstr_fd("\nUsage: ./client <server_PID> <MESSAGE>\n\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	check_pid(argv[1]);
+	encrypt_message(ft_atoi(argv[1]), argv[2]);
+	while (g_ack != 2)
+		usleep(50);
+	ft_putstr_fd("\nMessage Received!\n\n", 1);
 }

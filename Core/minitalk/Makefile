@@ -1,70 +1,94 @@
 # -*- Makefile -*-
 
-RED			=	\033[0;31m
-PURPLE		=	\033[0;35m
-GREEN		=	\033[0;32m
+# COLORS #
+RED			=	\033[1;31m
+PURPLE		=	\033[1;35m
+GREEN		=	\033[1;32m
 RESET		=	\033[0m
 
-NAME_S		=	$(EXE_DR)/server
-NAME_C		=	$(EXE_DR)/client
+# COMMANDS #
+MAKE		=	make -s -C
+RM			=	rm -rf
 
+# EXE NAME #
+NAME_C		=	$(EXE_DR)/client
+NAME_S		=	$(EXE_DR)/server
+
+# DIRECTORIES #
 LIBFT_DR	=	libft
 PRINTF_DR	=	ft_printf
 SRCS_DR		=	srcs
 INC_DR		=	inc
 EXE_DR		=	exe
 
-SRCS_S		=	$(SRCS_DR)/server.c
+# SOURCE AND OBJECT FILES #
 SRCS_C		=	$(SRCS_DR)/client.c
-
-OBJS_S		=	$(SRCS_S:.c=.o)
+SRCS_S		=	$(SRCS_DR)/server.c
 OBJS_C		=	$(SRCS_C:.c=.o)
+OBJS_S		=	$(SRCS_S:.c=.o)
 
+# COMPILER AND FLAGS #
 CC			=	cc
-CFLAGS		=	-Wall -Werror -Wextra -I$(LIBFT_DR)/inc -I$(PRINTF_DR)/inc -I$(INC_DR)
+CFLAGS		=	-Wall -Wextra -Werror -I$(LIBFT_DR)/$(INC_DR) -I$(PRINTF_DR)/$(INC_DR) -I$(INC_DR)
 
+# LIBRARIES #
 LIBFT		=	$(LIBFT_DR)/libft.a
 PRINTF		=	$(PRINTF_DR)/libftprintf.a
 
-
+# RULES #
 all			:	$(LIBFT) $(PRINTF) $(EXE_DR) $(NAME_C) $(NAME_S) 
 
 %.o			:	%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-
 $(LIBFT)	:
-	@echo "$(GREEN)\n📦 Creating Libft...$(RESET)"
-	@make -s -C $(LIBFT_DR)
+	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
+		echo "$(GREEN)\n📦 Creating Libft...$(RESET)"; \
+	else \
+		echo "$(GREEN)\n🔄 Rebuilding everything...$(RESET)\n"; \
+	fi
+	@$(MAKE) $(LIBFT_DR)
 
 $(PRINTF)	:
-	@echo "$(GREEN)📦 Creating Printf...$(RESET)"
-	@make -s -C $(PRINTF_DR)
+	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
+		echo "$(GREEN)📦 Creating Printf...$(RESET)"; \
+	fi
+	@$(MAKE) $(PRINTF_DR)
 
 $(EXE_DR)	:
-	@echo "$(GREEN)📂 Making executables directory...$(RESET)"
+	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
+		echo "$(GREEN)📂 Creating executable directory...$(RESET)"; \
+	fi
 	@mkdir -p $(EXE_DR)
 
-$(NAME_C)	:	$(OBJS_C)
-	@echo "$(PURPLE)🔗 Creating client executable...$(RESET)"
-	@$(CC) $(CFLAGS) -o $(NAME_C) $(OBJS_C) $(LIBFT) $(PRINTF)
+$(NAME_C)		:	$(OBJS_C)
+	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
+		echo "$(PURPLE)🔗 Creating client executable...$(RESET)"; \
+	fi
+	@$(CC) $(CFLAGS) $(OBJS_C) $(LIBFT) $(PRINTF) -o $(NAME_C)
 
-$(NAME_S)	:	$(OBJS_S)
-	@echo "$(PURPLE)🔗 Creating server executable...\n$(RESET)"
-	@$(CC) $(CFLAGS) -o $(NAME_S) $(OBJS_S) $(LIBFT) $(PRINTF)
+$(NAME_S)		:	$(OBJS_S)
+	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
+		echo "$(PURPLE)🔗 Creating server executable...\n$(RESET)"; \
+	fi
+	@$(CC) $(CFLAGS) $(OBJS_S) $(LIBFT) $(PRINTF) -o $(NAME_S)
 
 clean		:
-	@echo "$(RED)\n🧹 Cleaning object files...$(RESET)"
-	@rm -f $(OBJS_S) $(OBJS_C)
-	@make -s -C $(LIBFT_DR) clean
-	@make -s -C $(PRINTF_DR) clean
+	@if [ "$(MAKECMDGOALS)" != "fclean" ] && [ "$(MAKECMDGOALS)" != "re" ]; then \
+		echo "$(RED)\n🧹 Cleaning object files...\n$(RESET)"; \
+	fi
+	@$(RM) $(OBJS_C) $(OBJS_S)
+	@$(MAKE) $(LIBFT_DR) clean
+	@$(MAKE) $(PRINTF_DR) clean
 
 fclean		:	clean
-	@echo "$(RED)💥 Cleaning all...\n$(RESET)"
-	@rm -rf $(EXE_DR)
-	@make -s -C $(LIBFT_DR) fclean
-	@make -s -C $(PRINTF_DR) fclean
+	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
+		echo "$(RED)\n💥 Cleaning everything...\n$(RESET)"; \
+	fi
+	@$(RM) $(EXE_DR)
+	@$(MAKE) $(LIBFT_DR) fclean
+	@$(MAKE) $(PRINTF_DR) fclean
 
 re			:	fclean all
 
-.PHONY		:	all clean fclean re
+.PHONY		: all clean fclean re

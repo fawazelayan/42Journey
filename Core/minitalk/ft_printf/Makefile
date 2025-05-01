@@ -1,31 +1,38 @@
 # -*- Makefile -*-
 
-NAME	=	libftprintf.a
-
-SRCS	=	srcs/ft_printf.c srcs/ft_putchar.c	\
-			srcs/ft_putstr.c srcs/ft_putdec.c	\
-			srcs/ft_puthex.c srcs/ft_putpointer.c
-
-OBJS	=	$(SRCS:.c=.o)
-
-CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -Iinc
-
+# COMMANDS #
 ARC		=	ar crs
 RM		=	rm -f
 
-all		:	$(NAME)
+# ARCHIVE NAME #
+ARCHIVE	=	libftprintf.a
+
+# DIRECTORIES #
+SRCS_DR	=	srcs
+INC_DR	=	inc
+
+# SOURCE AND OBJECT FILES #
+SRCS	=	$(wildcard $(SRCS_DR)/*.c)
+OBJS	=	$(SRCS:.c=.o)
+
+# COMPILER AND FLAGS #
+CC		=	cc
+CFLAGS	=	-Wall -Wextra -Werror -I$(INC_DR)
+
+# RULES #
+all		:	$(ARCHIVE)
 
 %.o		:	%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME)	:	$(OBJS)
-	@$(ARC) $(NAME) $(OBJS)
+$(ARCHIVE)	:	$(OBJS)
+	@$(ARC) $(ARCHIVE) $(OBJS)
+
 clean	:
 	@$(RM) $(OBJS)
 
 fclean	:	clean
-	@$(RM) $(NAME)
+	@$(RM) $(ARCHIVE)
 
 re		:	fclean all
 

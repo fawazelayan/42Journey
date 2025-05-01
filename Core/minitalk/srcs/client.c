@@ -27,7 +27,7 @@ void	send_char(int pid, unsigned char char_sent)
 		else
 			kill(pid, SIGUSR2);
 		while (!g_ack)
-			usleep(50);
+			usleep(42);
 		i++;
 	}
 }

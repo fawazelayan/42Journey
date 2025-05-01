@@ -1,4 +1,4 @@
-# -*- Makefile 
+# -*- Makefile -*-
 
 RED			=	\033[0;31m
 PURPLE		=	\033[0;35m
@@ -27,22 +27,23 @@ LIBFT		=	$(LIBFT_DR)/libft.a
 PRINTF		=	$(PRINTF_DR)/libftprintf.a
 
 
-all			:	$(EXE_DR) $(LIBFT) $(PRINTF) $(NAME_C) $(NAME_S) 
+all			:	$(LIBFT) $(PRINTF) $(EXE_DR) $(NAME_C) $(NAME_S) 
 
 %.o			:	%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(EXE_DR)	:
-	@echo "$(GREEN)\n📂 Making executables directory...$(RESET)"
-	@mkdir -p $(EXE_DR)
 
 $(LIBFT)	:
-	@echo "$(GREEN)📦 Creating Libft...$(RESET)"
+	@echo "$(GREEN)\n📦 Creating Libft...$(RESET)"
 	@make -s -C $(LIBFT_DR)
 
 $(PRINTF)	:
 	@echo "$(GREEN)📦 Creating Printf...$(RESET)"
 	@make -s -C $(PRINTF_DR)
+
+$(EXE_DR)	:
+	@echo "$(GREEN)📂 Making executables directory...$(RESET)"
+	@mkdir -p $(EXE_DR)
 
 $(NAME_C)	:	$(OBJS_C)
 	@echo "$(PURPLE)🔗 Creating client executable...$(RESET)"

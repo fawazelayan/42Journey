@@ -1,59 +1,81 @@
-# -*- Makefile -*-
+#  ========================  #
+#							 #
+#  	   -*- MINITALK -*-	 	 #
+#							 #
+#  ========================	 #	
 
-# COLORS #
-RED			=	\033[1;31m
-PURPLE		=	\033[1;35m
-GREEN		=	\033[1;32m
-RESET		=	\033[0m
+#  ========================  #
+#			COLORS			 #
+#  ========================  #
+RED		=	\033[1;31m
+PURPLE	=	\033[1;35m
+GREEN	=	\033[1;32m
+RESET	=	\033[0m
 
-# COMMANDS #
-MAKE		=	make -s -C
-RM			=	rm -rf
 
-# EXE NAME #
+#  ========================  #
+#	    FILE STRUCTURE		 #
+#  ========================  #
 NAME_C		=	$(EXE_DR)/client
 NAME_S		=	$(EXE_DR)/server
 
-# DIRECTORIES #
-LIBFT_DR	=	libft
-PRINTF_DR	=	ft_printf
-SRCS_DR		=	srcs
-INC_DR		=	inc
 EXE_DR		=	exe
+LIB			=	lib
+LIBFT_DR	=	libft
+PRINTF_DR	=	printf
+SRCS_DR		=	srcs
+OBJS_DR		=	objs
+INC_DR		=	incs
 
-# SOURCE AND OBJECT FILES #
-SRCS_C		=	$(SRCS_DR)/client.c
-SRCS_S		=	$(SRCS_DR)/server.c
-OBJS_C		=	$(SRCS_C:.c=.o)
-OBJS_S		=	$(SRCS_S:.c=.o)
+LIBFT_INC	= $(LIB)/$(LIBFT_DR)/$(INC_DR)
+PRINTF_INC	= $(LIB)/$(PRINTF_DR)/$(INC_DR)
 
-# COMPILER AND FLAGS #
-CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -I$(LIBFT_DR)/$(INC_DR) -I$(PRINTF_DR)/$(INC_DR) -I$(INC_DR)
+#  ========================  #
+#	      COMMANDS			 #
+#  ========================  #
+MAKE	=	make -s -C
+RM		=	rm -rf
 
-# LIBRARIES #
-LIBFT		=	$(LIBFT_DR)/libft.a
-PRINTF		=	$(PRINTF_DR)/libftprintf.a
+#  ========================  #
+#		FILES AND PATHS		 #
+#  ========================  #
+SRCS_C	=	$(SRCS_DR)/client.c
+SRCS_S	=	$(SRCS_DR)/server.c
+OBJS_C	=	$(patsubst $(SRCS_DR)/%.c,$(OBJS_DR)/%.o,$(SRCS_C))
+OBJS_S	=	$(patsubst $(SRCS_DR)/%.c,$(OBJS_DR)/%.o,$(SRCS_S))
 
-# RULES #
-all			:	$(LIBFT) $(PRINTF) $(EXE_DR) $(NAME_C) $(NAME_S) 
+LIBFT	=	$(LIB)/$(LIBFT_DR)/libft.a
+PRINTF	=	$(LIB)/$(PRINTF_DR)/printf.a
 
-%.o			:	%.c
+#  ========================  #
+#	   COMPILATION RULES	 #
+#  ========================  #
+CC		=	cc
+CFLAGS	=	-Wall -Wextra -Werror \
+			-I$(LIBFT_INC) \
+			-I$(PRINTF_INC) \
+			-I$(INC_DR)
+
+#  ========================  #
+#			RULES			 #
+#  ========================  #
+all		:	$(NAME_C) $(NAME_S) 
+
+re		:	fclean all
+
+.PHONY	:	all clean fclean re
+
+# Compile .o files into objs/
+$(OBJS_DR)/%.o			:	$(SRCS_DR)/%.c	| $(OBJS_DR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(LIBFT)	:
-	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
-		echo "$(GREEN)\n📦 Creating Libft...$(RESET)"; \
-	else \
-		echo "$(GREEN)\n🔄 Rebuilding everything...$(RESET)\n"; \
-	fi
-	@$(MAKE) $(LIBFT_DR)
+#  ========================  #
+#		  BUILDING			 #
+#  ========================  #
 
-$(PRINTF)	:
-	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
-		echo "$(GREEN)📦 Creating Printf...$(RESET)"; \
-	fi
-	@$(MAKE) $(PRINTF_DR)
+$(OBJS_DR)	:
+	@mkdir -p $(OBJS_DR)
+
 
 $(EXE_DR)	:
 	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
@@ -61,34 +83,59 @@ $(EXE_DR)	:
 	fi
 	@mkdir -p $(EXE_DR)
 
-$(NAME_C)		:	$(OBJS_C)
+
+$(NAME_C)	:	$(LIBFT) $(PRINTF) $(OBJS_C) | $(EXE_DR)
 	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
 		echo "$(PURPLE)🔗 Creating client executable...$(RESET)"; \
 	fi
-	@$(CC) $(CFLAGS) $(OBJS_C) $(LIBFT) $(PRINTF) -o $(NAME_C)
+	@$(CC) $(CFLAGS) $(OBJS_C) \
+	$(LIBFT) $(PRINTF) -o $(NAME_C)
 
-$(NAME_S)		:	$(OBJS_S)
+
+$(NAME_S)	:	$(LIBFT) $(PRINTF) $(OBJS_S) | $(EXE_DR)
 	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
 		echo "$(PURPLE)🔗 Creating server executable...\n$(RESET)"; \
 	fi
-	@$(CC) $(CFLAGS) $(OBJS_S) $(LIBFT) $(PRINTF) -o $(NAME_S)
+	@$(CC) $(CFLAGS) $(OBJS_S) \
+	 $(LIBFT) $(PRINTF) -o $(NAME_S)
 
-clean		:
+
+$(LIBFT)	:
+	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
+		echo "$(GREEN)\n📦 Creating Libft...$(RESET)"; \
+	else \
+		echo "$(GREEN)\n🔄 Rebuilding everything...$(RESET)\n"; \
+	fi
+	@$(MAKE) $(LIB)/$(LIBFT_DR)
+
+
+$(PRINTF)	:
+	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
+		echo "$(GREEN)📦 Creating Printf...$(RESET)"; \
+	fi
+	@$(MAKE) $(LIB)/$(PRINTF_DR)
+
+#  ========================  #
+#		  CLEANING			 #
+#  ========================  #
+clean	:
 	@if [ "$(MAKECMDGOALS)" != "fclean" ] && [ "$(MAKECMDGOALS)" != "re" ]; then \
 		echo "$(RED)\n🧹 Cleaning object files...\n$(RESET)"; \
 	fi
-	@$(RM) $(OBJS_C) $(OBJS_S)
-	@$(MAKE) $(LIBFT_DR) clean
-	@$(MAKE) $(PRINTF_DR) clean
+	@$(RM) $(OBJS_DR)
+	@$(MAKE) $(LIB)/$(LIBFT_DR) clean
+	@$(MAKE) $(LIB)/$(PRINTF_DR) clean
 
-fclean		:	clean
+fclean	:	clean
 	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
 		echo "$(RED)\n💥 Cleaning everything...\n$(RESET)"; \
 	fi
 	@$(RM) $(EXE_DR)
-	@$(MAKE) $(LIBFT_DR) fclean
-	@$(MAKE) $(PRINTF_DR) fclean
+	@$(MAKE) $(LIB)/$(LIBFT_DR) fclean
+	@$(MAKE) $(LIB)/$(PRINTF_DR) fclean
 
-re			:	fclean all
-
-.PHONY		: all clean fclean re
+#  ========================  #
+#							 #
+#  	     -*- END -*-		 #
+#							 #
+#  ========================	 #

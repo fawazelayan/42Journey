@@ -94,3 +94,4 @@ int	lentonew(const char *s)
 		len++;
 	return (len + (s[len] == '\n'));
 }
+//

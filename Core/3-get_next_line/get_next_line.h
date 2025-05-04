@@ -17,6 +17,7 @@
 # endif
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(const char *s1, const char *s2);
@@ -26,3 +27,4 @@ int		ft_strlen(const char *s);
 int		lentonew(const char *s);
 
 #endif
+//

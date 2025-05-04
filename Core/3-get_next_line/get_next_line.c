@@ -111,3 +111,4 @@ char	*get_next_line(int fd)
 	set_next_line(&remain);
 	return (line);
 }
+//

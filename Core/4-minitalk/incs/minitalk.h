@@ -15,7 +15,7 @@
 # define _DEFAULT_SOURCE
 
 # include <signal.h>
-# include "libft.h"
 # include "ft_printf.h"
+# include "libft.h"
 
 #endif

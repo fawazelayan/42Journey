@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	rev_rotate(t_stack *stack)
+int	reverse_rotate(t_stack *stack)
 {
 	t_node	*tmp;
 
@@ -30,21 +30,21 @@ int	rev_rotate(t_stack *stack)
 
 void	rra(t_stack *a)
 {
-	if (rev_rotate(a))
+	if (reverse_rotate(a))
 		return ;
 	ft_printf("rra\n");
 }
 
 void	rrb(t_stack *b)
 {
-	if (rev_rotate(b))
+	if (reverse_rotate(b))
 		return ;
 	ft_printf("rrb\n");
 }
 
 void	rrr(t_stack *a, t_stack *b)
 {
-	if (rev_rotate(a) || rev_rotate(b))
+	if (reverse_rotate(a) || reverse_rotate(b))
 		return ;
 	ft_printf("rrr\n");
 }

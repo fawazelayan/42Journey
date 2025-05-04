@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	push_src_dest(t_stack *src, t_stack *dest)
+int	push_src_dst(t_stack *src, t_stack *dst)
 {
 	t_node	*tmp;
 
@@ -24,27 +24,27 @@ int	push_src_dest(t_stack *src, t_stack *dest)
 		src -> top -> prev = NULL;
 	else
 		src -> bot = NULL;
-	tmp -> next = dest -> top;
-	if (dest -> top)
-		dest -> top -> prev = tmp;
+	tmp -> next = dst -> top;
+	if (dst -> top)
+		dst -> top -> prev = tmp;
 	else
-		dest -> bot = tmp;
-	dest -> top = tmp;
+		dst -> bot = tmp;
+	dst -> top = tmp;
 	src -> size--;
-	dest -> size++;
+	dst -> size++;
 	return (0);
 }
 
 void	pa(t_stack *a, t_stack *b)
 {
-	if (push_src_dest(b, a))
+	if (push_src_dst(b, a))
 		return ;
 	ft_printf("pa\n");
 }
 
 void	pb(t_stack *a, t_stack *b)
 {
-	if (push_src_dest(a, b))
+	if (push_src_dst(a, b))
 		return ;
 	ft_printf("pb\n");
 }

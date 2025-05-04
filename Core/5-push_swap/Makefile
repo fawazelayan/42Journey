@@ -2,7 +2,7 @@
 #							 #
 #  	   -*- PUSH_SWAP -*-	 #
 #							 #
-#  ========================	 #									
+#  ========================  #
 
 #  ========================  #
 #			COLORS			 #
@@ -46,11 +46,11 @@ PRINTF	=	$(LIB)/$(PRINTF_DR)/printf.a
 #  ========================  #
 #	   COMPILATION RULES	 #
 #  ========================  #
-CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror \
-				-I$(LIBFT_INC) \
-				-I$(PRINTF_INC) \
-				-I$(INC_DR)
+CC		=	cc
+CFLAGS	=	-Wall -Wextra -Werror \
+			-I$(LIBFT_INC) \
+			-I$(PRINTF_INC) \
+			-I$(INC_DR)
 
 #  ========================  #
 #			RULES			 #
@@ -95,7 +95,7 @@ $(PRINTF)	:
 #  ========================  #
 #		  CLEANING			 #
 #  ========================  #
-clean		:
+clean	:
 	@if [ "$(MAKECMDGOALS)" != "fclean" ] && [ "$(MAKECMDGOALS)" != "re" ]; then \
 		echo "$(RED)\n🧹 Cleaning object files...\n$(RESET)"; \
 	fi
@@ -103,7 +103,7 @@ clean		:
 	@$(MAKE) $(LIB)/$(LIBFT_DR) clean
 	@$(MAKE) $(LIB)/$(PRINTF_DR) clean
 
-fclean		:	clean
+fclean	:	clean
 	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
 		echo "$(RED)\n💥 Cleaning everything...\n$(RESET)"; \
 	fi

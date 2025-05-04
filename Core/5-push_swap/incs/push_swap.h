@@ -88,8 +88,8 @@ void	pb(t_stack *a, t_stack *b);
 /*  ========================  */
 /*	   ROTATION OPERATIONS	  */
 /*  ========================  */
+int		reverse_rotate(t_stack *stack);
 int		rotate(t_stack *stack);
-int		rev_rotate(t_stack *stack);
 void	rrr(t_stack *a, t_stack *b);
 void	rr(t_stack *a, t_stack *b);
 void	ra(t_stack *a);

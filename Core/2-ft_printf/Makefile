@@ -1,4 +1,4 @@
-# -*- Makefile -*-
+# -*- Makefile -*- #
 
 NAME	=	libftprintf.a
 

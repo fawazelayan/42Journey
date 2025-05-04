@@ -15,3 +15,4 @@ int	put_c(char c)
 {
 	return (write(1, &c, 1));
 }
+//

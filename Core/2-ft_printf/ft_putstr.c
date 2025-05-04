@@ -22,3 +22,4 @@ int	put_s(char *s)
 		i++;
 	return (write(1, s, i));
 }
+//

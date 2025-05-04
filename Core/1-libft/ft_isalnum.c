@@ -12,20 +12,9 @@
 
 int	ft_isalnum(int c)
 {
-	if (((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+	if (((c >= 'A' && c <= 'Z')
+			|| (c >= 'a' && c <= 'z'))
 		|| (c >= '0' && c <= '9'))
 		return (1);
 	return (0);
 }
-/*
-#include<stdio.h>
-int main()
-{
-	int i = 1;
-	char a = 'a';
-	while (a <= 'z')
-	{
-		printf("%d: %d\n", i++, ft_isalnum(a));
-		a++;
-	}
-}*/

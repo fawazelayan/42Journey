@@ -73,10 +73,3 @@ char	*ft_itoa(int n)
 		fills(nm, nms);
 	return (nms);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	char *s = ft_itoa(0);
-	printf("%s\n", s);
-}*/

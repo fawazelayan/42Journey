@@ -24,3 +24,4 @@ char	*ft_strdup(const char *s)
 	ft_memcpy(dup, s, len);
 	return (dup);
 }
+//

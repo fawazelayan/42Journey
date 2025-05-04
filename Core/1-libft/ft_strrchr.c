@@ -24,19 +24,3 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (NULL);
 }
-/*
-#include <stdio.h>
-int main() {
-    const char *str = "hello w\0rld";
-    char target = '\0';
-    char *result = ft_strrchr(str, target);
-
-    if (result) {
-        printf("Last occurrence of '%c': %s\n", target, result);
-	printf("Location at: %ld",result - str);
-    } else {
-        printf("Character '%c' not found\n", target);
-    }
-
-    return 0;
-}*/

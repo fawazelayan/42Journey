@@ -11,15 +11,6 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-/*char	transform(unsigned int b, char c)
-{
-	if (!(b % 2) && ft_isalpha(c))
-		return (c + 1);
-	else if (ft_isalpha(c))
-		return (c - 1);
-	return (c);
-}*/
-
 char	*ft_strmapi(char const *s, char (*f) (unsigned int, char))
 {
 	unsigned int	i;
@@ -39,13 +30,3 @@ char	*ft_strmapi(char const *s, char (*f) (unsigned int, char))
 	map[i] = '\0';
 	return (map);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	char *s = "Hello 42 Amman";
-	char *b = ft_strmapi(s, transform);
-
-	printf("%s\n", b);
-	free(b);
-}*/

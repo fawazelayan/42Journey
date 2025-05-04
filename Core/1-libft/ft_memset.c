@@ -26,11 +26,3 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
-
-/*#include <stdio.h>
-int main()
-{
-	char s[10];
-	char *p = ft_memset(s, 'a', 5);
-	printf("%s", p);
-}*/

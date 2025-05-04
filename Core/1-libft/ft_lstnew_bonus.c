@@ -22,28 +22,3 @@ t_list	*ft_lstnew(void *content)
 	new -> next = NULL;
 	return (new);
 }
-/*
-#include <stdio.h>
-
-int main()
-{
-    int a = 42;
-    int b = 40;
-
-    // Passing addresses of a and b, and casting to void*
-    t_list *node1 = ft_lstnew((void *)&a);
-    t_list *node2 = ft_lstnew((void *)&b);
-
-    // Linking nodes
-    node1->next = node2;
-
-    // Accessing the content of the nodes (need to cast back to int*)
-    printf("Node 1 content: %d\n", *(int *)(node1->content));
-    printf("Node 2 content: %d\n", *(int *)(node2->content));
-
-    // Freeing memory
-    free(node1);
-    free(node2);
-
-    return 0;
-}*/

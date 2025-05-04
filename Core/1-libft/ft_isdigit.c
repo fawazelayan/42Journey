@@ -16,15 +16,3 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	char a = '0';
-	int i = 0;
-	while (a <= '9')
-	{
-		printf("%d: %d\n",i++,ft_isdigit(a));
-		a++;
-	}
-}*/

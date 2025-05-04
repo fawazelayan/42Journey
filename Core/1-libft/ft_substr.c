@@ -35,12 +35,3 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	sub[len] = '\0';
 	return (sub);
 }
-/*#include <stdio.h>
-int main()
-{
-//	char *str= "lorem ipsum dolor sit amet";
-	 char    *strsub;
-	 strsub = ft_substr("", 0, 0);
-	 printf("%s", strsub);
-	 free(strsub);
-}*/

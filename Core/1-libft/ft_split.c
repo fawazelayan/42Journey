@@ -99,14 +99,3 @@ char	**ft_split(const char *s, char d)
 		return (NULL);
 	return (strs);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	char *s = "      split       this for   me  !       ";
-	char d = ' ';
-	int i = 0;
-	char **sp = ft_split(s, d);
-	while(sp[i])
-		printf("%s\n", sp[i++]);
-}*/

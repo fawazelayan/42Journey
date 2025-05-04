@@ -24,21 +24,3 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)s);
 	return (NULL);
 }
-/*
-#include <stdio.h>
-int main() {
-    const char *str = "teste";
-    char target = '\0';  // Search for the null terminator
-    char *result;
-
-    // Find the null terminator in the string
-    result = ft_strchr(str,target);
-
-    if (result) {
-        printf("Null terminator found at position: %p\n", result);
-    } else {
-        printf("Null terminator not found.\n");
-    }
-
-    return 0;
-}*/

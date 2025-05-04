@@ -18,16 +18,3 @@ int	ft_isprint(int c)
 		return (0);
 	return (1);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	int i = -1;
-	int a = 0;
-	while (a <= 129)
-	{
-		printf("%d: %d\n",i++,ft_isprint(a));
-		a++;
-	}
-}
-*/

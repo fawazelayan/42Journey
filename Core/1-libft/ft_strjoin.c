@@ -28,3 +28,4 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	ft_memmove(join + ss1, s2, ss2 + 1);
 	return (join);
 }
+//

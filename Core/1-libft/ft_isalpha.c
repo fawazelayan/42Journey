@@ -17,16 +17,3 @@ int	ft_isalpha(int c)
 		return (1);
 	return (0);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	int b = 1;
-	char a = 65;
-	//printf("%d", ft_isalpha('a'));
-	while (a <= 'Z')
-	{
-		printf("%d: %d - %c\n",b++,ft_isalpha(a),a);
-		a++;
-	}
-}*/

@@ -16,15 +16,3 @@ int	ft_isascii(int c)
 		return (1);
 	return (0);
 }
-/*
-#include<stdio.h>
-int main()
-{
-	int i = 0;
-	int a = 0;
-	while(a <= 127)
-	{
-		printf("%d: %d\n",i++,ft_isascii(a));
-		a++;
-	}
-}*/

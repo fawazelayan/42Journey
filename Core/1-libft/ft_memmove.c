@@ -38,11 +38,3 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	char d[] = "Hello";
-	ft_memmove(d + 1, d, 3);
-	printf("%s", d);
-}*/

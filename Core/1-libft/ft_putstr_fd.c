@@ -18,9 +18,3 @@ void	ft_putstr_fd(char *s, int fd)
 	i = ft_strlen(s);
 	write(fd, s, i);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	ft_putstr_fd("Hello 42\n", 1);
-}*/

@@ -16,9 +16,3 @@ void	ft_putendl_fd(char *s, int fd)
 	ft_putstr_fd(s, fd);
 	ft_putchar_fd('\n', fd);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	ft_putendl_fd("Hello 42", 1);
-}*/

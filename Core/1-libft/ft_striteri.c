@@ -11,11 +11,6 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-/*void	trans(unsigned int b, char *c)
-{
-	*c = *c + b;
-}*/
-
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	unsigned int	i;
@@ -29,12 +24,3 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 		i++;
 	}
 }
-/*
-#include <stdio.h>
-int main()
-{
-	char s[] = "Hello 42 Amman";
-
-	ft_striteri(s, trans);
-	printf("%s\n", s);
-}*/

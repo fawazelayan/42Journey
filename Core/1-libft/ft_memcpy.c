@@ -30,12 +30,3 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	char d[50] = "\0";
-	printf("Original: %s", d);
-	ft_memcpy(d,d + 1, 3);
-	printf("\nMod: %s", d);
-}*/

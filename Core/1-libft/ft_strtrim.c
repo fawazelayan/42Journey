@@ -46,11 +46,3 @@ char	*ft_strtrim(const char *s, const char *set)
 	trim[en - st] = '\0';
 	return (trim);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	char *str = ft_strtrim("alooppabcppooll","pol");
-	printf("%s", str);
-	free(str);
-}*/

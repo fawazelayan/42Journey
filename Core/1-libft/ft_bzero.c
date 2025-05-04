@@ -25,19 +25,3 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
-/*
-#include <stdio.h>
-int main() {
-    char str[20] = "Hello, World!";
-
-    // Print the original string
-    printf("Original string: '%s'\n", str);
-
-    // Zero out the first 5 bytes of the string
-    ft_bzero(str + 2, 5);
-
-    // Print the modified string
-    printf("Modified string: '%s'\n", str);
-
-    return 0;
-}*/

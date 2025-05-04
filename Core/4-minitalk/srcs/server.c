@@ -56,7 +56,7 @@ int	main(void)
 {
 	struct sigaction	act;
 
-	ft_printf("\nServer is online and the PID is: [%d]\n\n", getpid());
+	ft_printf("\nServer is online and PID for it is: [%d]\n\n", getpid());
 	act.sa_handler = NULL;
 	act.sa_sigaction = &sigusr_handle;
 	act.sa_flags = SA_SIGINFO;

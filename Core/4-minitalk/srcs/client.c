@@ -87,6 +87,6 @@ int	main(int argc, char **argv)
 	check_pid(argv[1]);
 	encrypt_message(ft_atoi(argv[1]), argv[2]);
 	while (g_ack != 2)
-		usleep(50);
+		usleep(42);
 	ft_putstr_fd("\nMessage Received!\n\n", 1);
 }

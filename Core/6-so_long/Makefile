@@ -49,7 +49,9 @@ CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror \
 			-I$(LIBFT_INC) \
 			-I$(PRINTF_INC) \
-			-I$(INC_DR)
+			-I$(INC_DR) \
+			-Imlx 
+			
 
 #  ========================  #
 #			RULES			 #
@@ -73,7 +75,9 @@ $(NAME)		:	$(LIBFT) $(PRINTF) $(OBJS)
 		echo "$(PURPLE)🔗 Creating so_long executable...\n$(RESET)"; \
 	fi
 	@$(CC) $(CFLAGS) $(OBJS) \
-	$(LIBFT) $(PRINTF) -o $(NAME)
+	$(LIBFT) $(PRINTF) \
+	mlx/libmlx.a -Lmlx -lmlx -lXext -lX11 -lm -lz \
+	-o $(NAME)
 
 
 $(LIBFT)	:

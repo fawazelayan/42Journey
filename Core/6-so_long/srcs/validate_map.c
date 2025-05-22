@@ -87,7 +87,6 @@ int	is_invalid_count(char **map, int rows)
 
 	p_cnt = 0;
 	e_cnt = 0;
-	c_cnt = 0;
 	c_cnt = count_collectibles(map);
 	count_chars(map, rows, &p_cnt, &e_cnt);
 	if (p_cnt != 1 || e_cnt != 1 || c_cnt < 1)

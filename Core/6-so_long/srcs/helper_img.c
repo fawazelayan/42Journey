@@ -29,26 +29,26 @@ void	load_player_imgs(t_textures *imgs, void *mlx)
 	imgs -> p_r[1] = mlx_xpm_file_to_image(mlx, "txtrs/p_r2.xpm", &w, &h);
 }
 
-void	load_moves_imgs(t_textures *imgs, void *mlx)
+void	load_number_imgs(t_textures *imgs, void *mlx)
 {
 	int	w;
 	int	h;
 
 	w = imgs -> width;
 	h = imgs -> height;
-	imgs -> mvs[0] = mlx_xpm_file_to_image(mlx, "txtrs/0.xpm", &w, &h);
-	imgs -> mvs[1] = mlx_xpm_file_to_image(mlx, "txtrs/1.xpm", &w, &h);
-	imgs -> mvs[2] = mlx_xpm_file_to_image(mlx, "txtrs/2.xpm", &w, &h);
-	imgs -> mvs[3] = mlx_xpm_file_to_image(mlx, "txtrs/3.xpm", &w, &h);
-	imgs -> mvs[4] = mlx_xpm_file_to_image(mlx, "txtrs/4.xpm", &w, &h);
-	imgs -> mvs[5] = mlx_xpm_file_to_image(mlx, "txtrs/5.xpm", &w, &h);
-	imgs -> mvs[6] = mlx_xpm_file_to_image(mlx, "txtrs/6.xpm", &w, &h);
-	imgs -> mvs[7] = mlx_xpm_file_to_image(mlx, "txtrs/7.xpm", &w, &h);
-	imgs -> mvs[8] = mlx_xpm_file_to_image(mlx, "txtrs/8.xpm", &w, &h);
-	imgs -> mvs[9] = mlx_xpm_file_to_image(mlx, "txtrs/9.xpm", &w, &h);
+	imgs -> num[0] = mlx_xpm_file_to_image(mlx, "txtrs/0.xpm", &w, &h);
+	imgs -> num[1] = mlx_xpm_file_to_image(mlx, "txtrs/1.xpm", &w, &h);
+	imgs -> num[2] = mlx_xpm_file_to_image(mlx, "txtrs/2.xpm", &w, &h);
+	imgs -> num[3] = mlx_xpm_file_to_image(mlx, "txtrs/3.xpm", &w, &h);
+	imgs -> num[4] = mlx_xpm_file_to_image(mlx, "txtrs/4.xpm", &w, &h);
+	imgs -> num[5] = mlx_xpm_file_to_image(mlx, "txtrs/5.xpm", &w, &h);
+	imgs -> num[6] = mlx_xpm_file_to_image(mlx, "txtrs/6.xpm", &w, &h);
+	imgs -> num[7] = mlx_xpm_file_to_image(mlx, "txtrs/7.xpm", &w, &h);
+	imgs -> num[8] = mlx_xpm_file_to_image(mlx, "txtrs/8.xpm", &w, &h);
+	imgs -> num[9] = mlx_xpm_file_to_image(mlx, "txtrs/9.xpm", &w, &h);
 }
 
-int	img_fail_player(t_textures *imgs)
+int	is_null_player(t_textures *imgs)
 {
 	if (!imgs -> p_u[0] || !imgs -> p_u[1]
 		|| !imgs -> p_d[0] || !imgs -> p_d[1])
@@ -59,14 +59,14 @@ int	img_fail_player(t_textures *imgs)
 	return (0);
 }
 
-int	img_fail_moves(t_textures *imgs)
+int	is_null_number(t_textures *imgs)
 {
 	int	i;
 
 	i = 0;
 	while (i < 10)
 	{
-		if (!imgs -> mvs[i])
+		if (!imgs -> num[i])
 			return (1);
 		i++;
 	}
@@ -85,7 +85,7 @@ void	nullify_imgs(t_textures *imgs)
 	imgs->tile = NULL;
 	imgs -> enemy = NULL;
 	while (i < 10)
-		imgs -> mvs[i++] = NULL;
+		imgs -> num[i++] = NULL;
 	i = 0;
 	while (i < 2)
 	{

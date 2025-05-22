@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 		close_game(&witch);
 	}
 	render_game(&witch);
-	mlx_hook(witch.win, 2, 1L << 0, key_handle, &witch);
+	mlx_hook(witch.win, 2, 1L << 0, &key_press_handler, &witch);
 	mlx_hook(witch.win, 17, 0, &close_game, &witch);
 	mlx_loop(witch.mlx);
 }

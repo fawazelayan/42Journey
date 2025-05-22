@@ -29,9 +29,8 @@
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include "libft.h"
-# include "mlx.h"
+# include "mlx.h"  // Change to <mlx.h>
 # include <fcntl.h>
-# include <X11/Xlib.h>
 # include <X11/keysym.h>
 
 /*  ========================  */
@@ -53,8 +52,7 @@ typedef struct s_textures
 	void	*cllct;
 	void	*wall;
 	void	*tile;
-	void	*mvs[10];
-	void	*e_u[2];
+	void	*num[10];
 	void	*p_r[2];
 	void	*p_l[2];
 	void	*p_d[2];
@@ -83,10 +81,10 @@ typedef struct s_game
 /*		  HELPER FUNCS		  */
 /*  ========================  */
 void	map_dimensions(char **map, int *rows, int *cols);
-void	find_player_position(char **ma, int *x, int *y);
+void	find_player_position(char **map, int *x, int *y);
 void	put_img(t_game *game, void *img, int x, int y);
 void	load_player_imgs(t_textures *imgs, void *mlx);
-void	load_moves_imgs(t_textures *imgs, void *mlx);
+void	load_number_imgs(t_textures *imgs, void *mlx);
 void	flood_fill(char **map, int x, int y);
 void	end_game(char elem, t_game *game);
 void	find_exit_position(t_game *game);
@@ -95,8 +93,8 @@ void	strip_newline(char *line);
 void	re_render(t_game *game);
 void	print_error(char *err);
 int		read_map(char *map, char ***parsed, int count);
-int		img_fail_player(t_textures *imgs);
-int		img_fail_moves(t_textures *imgs);
+int		is_null_player(t_textures *imgs);
+int		is_null_number(t_textures *imgs);
 int		not_flooded(char **map);
 char	**copy_map(char **map, int rows);
 
@@ -105,7 +103,6 @@ char	**copy_map(char **map, int rows);
 /*  ========================  */
 void	count_chars(char **map, int rows, int *p_cnt, int *e_cnt);
 int		count_collectibles(char **map);
-int		count_enemies(char **map);
 int		count_lines(int fd);
 
 /*  ========================  */
@@ -141,7 +138,7 @@ void	render_moves(t_game *game);
 /*  ========================  */
 /*		CLEANING FUNCS		  */
 /*  ========================  */
-void	clean_player_enemy_imgs(t_textures *imgs, void *mlx);
+void	clean_player_imgs(t_textures *imgs, void *mlx);
 void	clean_imgs(t_textures *imgs, void *mlx);
 void	clean_map(char **map);
 int		close_game(t_game *game);
@@ -149,7 +146,7 @@ int		close_game(t_game *game);
 /*  ========================  */
 /*		  HOOKS FUNCS		  */
 /*  ========================  */
-int		key_handle(int keysym, t_game *game);
+int		key_press_handler(int keysym, t_game *game);
 void	move_right(t_game *game);
 void	move_down(t_game *game);
 void	move_left(t_game *game);

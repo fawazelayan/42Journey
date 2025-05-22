@@ -34,8 +34,8 @@ char	**parse_map(char *map)
 
 int	init_imgs(t_textures *imgs, void *mlx)
 {
-	imgs -> width = 64;
-	imgs -> height = 64;
+	imgs -> width = IMG_W;
+	imgs -> height = IMG_H;
 	imgs -> d_closed = mlx_xpm_file_to_image(mlx, "txtrs/d_closed.xpm",
 			&imgs -> width, &imgs -> height);
 	imgs -> d_open = mlx_xpm_file_to_image(mlx, "txtrs/d_open.xpm",
@@ -49,10 +49,10 @@ int	init_imgs(t_textures *imgs, void *mlx)
 	imgs -> enemy = mlx_xpm_file_to_image(mlx, "txtrs/enemy.xpm",
 			&imgs -> width, &imgs -> height);
 	load_player_imgs(imgs, mlx);
-	load_moves_imgs(imgs, mlx);
+	load_number_imgs(imgs, mlx);
 	if (!imgs -> wall || !imgs -> tile || !imgs -> cllct
 		|| !imgs -> d_closed || !imgs -> d_open || !imgs -> enemy
-		|| img_fail_player(imgs) || img_fail_moves(imgs))
+		|| is_null_player(imgs) || is_null_number(imgs))
 		return (1);
 	return (0);
 }

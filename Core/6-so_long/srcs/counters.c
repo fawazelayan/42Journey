@@ -78,29 +78,3 @@ int	count_collectibles(char **map)
 	}
 	return (count);
 }
-
-int	count_enemies(char **map)
-{
-	int	count;
-	int	rows;
-	int	cols;
-	int	i;
-	int	j;
-
-	i = 1;
-	j = 1;
-	count = 0;
-	map_dimensions(map, &rows, &cols);
-	while (i < rows - 1)
-	{
-		j = 1;
-		while (j < cols - 1)
-		{
-			if (map[i][j] == 'X')
-				count++;
-			j++;
-		}
-		i++;
-	}
-	return (count);
-}

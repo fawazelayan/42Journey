@@ -27,13 +27,11 @@ void	clean_map(char **map)
 	free(map);
 }
 
-void	clean_player_enemy_imgs(t_textures *imgs, void *mlx)
+void	clean_player_imgs(t_textures *imgs, void *mlx)
 {
 	int	i;
 
 	i = 0;
-	if (imgs -> enemy)
-		mlx_destroy_image(mlx, imgs -> enemy);
 	while (i < 2)
 	{
 		if (imgs -> p_u[i])
@@ -63,11 +61,13 @@ void	clean_imgs(t_textures *imgs, void *mlx)
 		mlx_destroy_image(mlx, imgs->wall);
 	if (imgs->tile)
 		mlx_destroy_image(mlx, imgs->tile);
-	clean_player_enemy_imgs(imgs, mlx);
+	if (imgs -> enemy)
+		mlx_destroy_image(mlx, imgs -> enemy);
+	clean_player_imgs(imgs, mlx);
 	while (i < 10)
 	{
-		if (imgs -> mvs[i])
-			mlx_destroy_image(mlx, imgs -> mvs[i]);
+		if (imgs -> num[i])
+			mlx_destroy_image(mlx, imgs -> num[i]);
 		i++;
 	}
 	nullify_imgs(imgs);

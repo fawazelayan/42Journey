@@ -47,6 +47,30 @@ void	render_elem(t_game *game, char elem, int x, int y)
 		put_img(game, game -> imgs.enemy, x, y);
 }
 
+void	render_moves(t_game *game)
+{
+	int	i;
+	int	moves;
+	int	digits[10];
+	int	count;
+
+	i = 0;
+	count = 0;
+	moves = game -> player.moves;
+	if (moves == 0)
+	{
+		put_img(game, game -> imgs.num[0], 0, 0);
+		return ;
+	}
+	while (moves > 0 && count < 10)
+	{
+		digits[count++] = moves % 10;
+		moves /= 10;
+	}
+	while (count-- > 0)
+		put_img(game, game->imgs.num[digits[count]], i++, 0);
+}
+
 void	render_game(t_game *game)
 {
 	int	x;
@@ -59,34 +83,10 @@ void	render_game(t_game *game)
 		while (x < game -> width / IMG_W)
 		{
 			put_img(game, game -> imgs.tile, x, y);
-			render_elem(game, game ->map[y][x], x, y);
+			render_elem(game, game -> map[y][x], x, y);
 			x++;
 		}
 		y++;
 	}
 	render_moves(game);
-}
-
-void	render_moves(t_game *game)
-{
-	int	i;
-	int	moves;
-	int	digits[10];
-	int	count;
-
-	i = 0;
-	count = 0;
-	moves = game->player.moves;
-	if (moves == 0)
-	{
-		put_img(game, game -> imgs.mvs[0], 0, 0);
-		return ;
-	}
-	while (moves > 0 && count < 10)
-	{
-		digits[count++] = moves % 10;
-		moves /= 10;
-	}
-	while (count-- > 0)
-		put_img(game, game->imgs.mvs[digits[count]], i++, 0);
 }

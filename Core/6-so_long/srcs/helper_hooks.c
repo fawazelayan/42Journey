@@ -28,7 +28,7 @@ void	end_game(char elem, t_game *game)
 
 void	re_render(t_game *game)
 {
-	game->map[game->player.y][game->player.x] = '0';
-	if (game->exit_x == game->player.x && game->exit_y == game->player.y)
-		game->map[game->player.y][game->player.x] = 'E';
+	game -> map[game -> player.y][game -> player.x] = '0';
+	if (game -> exit_x == game->player.x && game -> exit_y == game -> player.y)
+		game -> map[game -> player.y][game -> player.x] = 'E';
 }

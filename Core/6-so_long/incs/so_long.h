@@ -57,7 +57,7 @@ typedef struct s_textures
 	void	*p_l[2];
 	void	*p_d[2];
 	void	*p_u[2];
-	void	*enemy;
+	void	*enemy[2];
 	int		height;
 	int		width;
 }	t_textures;
@@ -67,6 +67,7 @@ typedef struct s_game
 	char		**map;
 	int			cllcts_num;
 	int			cllctd;
+	int			eframe;	// Frame for enemy imgs
 	int			exit_x;
 	int			exit_y;
 	int			height;

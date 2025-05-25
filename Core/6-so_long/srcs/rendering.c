@@ -44,7 +44,7 @@ void	render_elem(t_game *game, char elem, int x, int y)
 	else if (elem == 'P')
 		render_player(game, x, y);
 	else if (elem == 'X')
-		put_img(game, game -> imgs.enemy, x, y);
+		put_img(game, game -> imgs.enemy[game -> eframe % 2], x, y);
 }
 
 void	render_moves(t_game *game)
@@ -89,4 +89,5 @@ void	render_game(t_game *game)
 		y++;
 	}
 	render_moves(game);
+	game -> eframe++;
 }

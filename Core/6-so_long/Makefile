@@ -56,7 +56,7 @@ CFLAGS	=	-Wall -Wextra -Werror \
 			-I$(GNL_INC) \
 			-I$(INC_DR) \
 			-I$(MLX_DIR)
-MLX_LBS	=	-L./$(MLX_DIR) -lmlx -lXext -lX11 -lm -ldl # Change to -L$(MLX_DIR)
+MLX_LBS	=	-L./$(MLX_DIR) -lmlx -lXext -lX11 -lm -ldl # Change only -L./$(MLX_DIR) to -L$(MLX_DIR)
 
 #  ========================  #
 #			RULES			 #

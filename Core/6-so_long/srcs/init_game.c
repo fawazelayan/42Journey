@@ -32,6 +32,14 @@ char	**parse_map(char *map)
 	return (parsed);
 }
 
+void	init_player(t_player *player, char **map)
+{
+	player -> moves = 0;
+	player -> frame = 0;
+	player -> dir = DOWN;
+	find_player_position(map, &player -> x, &player -> y);
+}
+
 int	init_imgs(t_textures *imgs, void *mlx)
 {
 	imgs -> width = IMG_W;
@@ -46,23 +54,18 @@ int	init_imgs(t_textures *imgs, void *mlx)
 			&imgs -> width, &imgs -> height);
 	imgs -> tile = mlx_xpm_file_to_image(mlx, "txtrs/tile.xpm",
 			&imgs -> width, &imgs -> height);
-	imgs -> enemy = mlx_xpm_file_to_image(mlx, "txtrs/enemy.xpm",
+	imgs -> enemy[0] = mlx_xpm_file_to_image(mlx, "txtrs/enemy1.xpm",
+			&imgs -> width, &imgs -> height);
+	imgs -> enemy[1] = mlx_xpm_file_to_image(mlx, "txtrs/enemy2.xpm",
 			&imgs -> width, &imgs -> height);
 	load_player_imgs(imgs, mlx);
 	load_number_imgs(imgs, mlx);
 	if (!imgs -> wall || !imgs -> tile || !imgs -> cllct
-		|| !imgs -> d_closed || !imgs -> d_open || !imgs -> enemy
+		|| !imgs -> d_closed || !imgs -> d_open
+		|| !imgs -> enemy[0] || !imgs -> enemy[1]
 		|| is_null_player(imgs) || is_null_number(imgs))
 		return (1);
 	return (0);
-}
-
-void	init_player(t_player *player, char **map)
-{
-	player -> moves = 0;
-	player -> frame = 0;
-	player -> dir = DOWN;
-	find_player_position(map, &player -> x, &player -> y);
 }
 
 int	init_game(t_game *game, char *map)
@@ -79,9 +82,9 @@ int	init_game(t_game *game, char *map)
 	map_dimensions(game -> map, &game -> height, &game -> width);
 	game -> height *= IMG_H;
 	game -> width *= IMG_W;
+	init_player(&game -> player, game -> map);
 	if (init_imgs(&game -> imgs, game -> mlx))
 		return (1);
-	init_player(&game -> player, game -> map);
 	game -> win = mlx_new_window(game -> mlx,
 			game -> width, game -> height, "Witch Cat");
 	if (!game -> win)

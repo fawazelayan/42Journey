@@ -31,21 +31,19 @@ void	load_player_imgs(t_textures *imgs, void *mlx)
 
 void	load_number_imgs(t_textures *imgs, void *mlx)
 {
-	int	w;
-	int	h;
+	int			i;
+	int			h;
+	int			w;
+	static char	path[] = "txtrs/0.xpm";
 
-	w = imgs -> width;
+	i = 0;
 	h = imgs -> height;
-	imgs -> num[0] = mlx_xpm_file_to_image(mlx, "txtrs/0.xpm", &w, &h);
-	imgs -> num[1] = mlx_xpm_file_to_image(mlx, "txtrs/1.xpm", &w, &h);
-	imgs -> num[2] = mlx_xpm_file_to_image(mlx, "txtrs/2.xpm", &w, &h);
-	imgs -> num[3] = mlx_xpm_file_to_image(mlx, "txtrs/3.xpm", &w, &h);
-	imgs -> num[4] = mlx_xpm_file_to_image(mlx, "txtrs/4.xpm", &w, &h);
-	imgs -> num[5] = mlx_xpm_file_to_image(mlx, "txtrs/5.xpm", &w, &h);
-	imgs -> num[6] = mlx_xpm_file_to_image(mlx, "txtrs/6.xpm", &w, &h);
-	imgs -> num[7] = mlx_xpm_file_to_image(mlx, "txtrs/7.xpm", &w, &h);
-	imgs -> num[8] = mlx_xpm_file_to_image(mlx, "txtrs/8.xpm", &w, &h);
-	imgs -> num[9] = mlx_xpm_file_to_image(mlx, "txtrs/9.xpm", &w, &h);
+	w = imgs -> width;
+	while (i < 10)
+	{
+		path[6] = '0' + i;
+		imgs -> num[i++] = mlx_xpm_file_to_image(mlx, path, &w, &h);
+	}
 }
 
 int	is_null_player(t_textures *imgs)
@@ -66,9 +64,8 @@ int	is_null_number(t_textures *imgs)
 	i = 0;
 	while (i < 10)
 	{
-		if (!imgs -> num[i])
+		if (!imgs -> num[i++])
 			return (1);
-		i++;
 	}
 	return (0);
 }
@@ -78,21 +75,20 @@ void	nullify_imgs(t_textures *imgs)
 	int	i;
 
 	i = 0;
-	imgs->d_closed = NULL;
-	imgs->d_open = NULL;
-	imgs->cllct = NULL;
-	imgs->wall = NULL;
-	imgs->tile = NULL;
-	imgs -> enemy = NULL;
+	imgs -> d_closed = NULL;
+	imgs -> d_open = NULL;
+	imgs -> cllct = NULL;
+	imgs -> wall = NULL;
+	imgs -> tile = NULL;
 	while (i < 10)
 		imgs -> num[i++] = NULL;
 	i = 0;
 	while (i < 2)
 	{
-		imgs->p_u[i] = NULL;
-		imgs->p_d[i] = NULL;
-		imgs->p_l[i] = NULL;
-		imgs->p_r[i] = NULL;
-		i++;
+		imgs -> p_u[i] = NULL;
+		imgs -> p_d[i] = NULL;
+		imgs -> p_l[i] = NULL;
+		imgs -> p_r[i] = NULL;
+		imgs -> enemy[i++] = NULL;
 	}
 }

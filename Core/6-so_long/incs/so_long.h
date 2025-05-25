@@ -139,7 +139,7 @@ void	render_moves(t_game *game);
 /*  ========================  */
 /*		CLEANING FUNCS		  */
 /*  ========================  */
-void	clean_player_imgs(t_textures *imgs, void *mlx);
+void	clean_player_enemy_imgs(t_textures *imgs, void *mlx);
 void	clean_imgs(t_textures *imgs, void *mlx);
 void	clean_map(char **map);
 int		close_game(t_game *game);

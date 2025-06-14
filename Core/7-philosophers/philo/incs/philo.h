@@ -1,0 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: felayan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 20:55:47 by felayan           #+#    #+#             */
+/*   Updated: 2025/05/27 20:55:54 by felayan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PHILO_H
+# define PHILO_H
+
+# include <sys/time.h> // gettimeofday
+# include <pthread.h> // pthread functions
+# include <string.h> // memset
+# include <unistd.h> // usleep, write
+# include <stdlib.h> // malloc, free
+# include <stdio.h> // printf
+# include <limits.h> // LONG_MAX
+
+# define YLW	"\033[0;33m"
+# define GRN	"\033[0;32m"
+# define RED	"\033[0;31m"
+# define RST	"\033[0m"
+
+typedef struct s_data	t_data;
+
+typedef struct s_fork
+{
+	pthread_mutex_t	mutex;
+	int				id;
+}	t_fork;
+
+typedef struct s_philo
+{
+	long		lmt;	// last_meal_time
+	long		meal_cntr;
+	t_fork		*right;
+	t_fork		*left;
+	t_data		*table;
+	pthread_t	thread;
+	int			full;
+	int			id;
+
+}	t_philo;
+
+struct s_data
+{
+	long	tod;	// time_to_die
+	long	toe;	// time_to_eat
+	long	tos;	// time_to_sleep
+	long	philos_num;
+	long	meals_num;
+	long	start;
+	long	end;
+	t_philo	*philos;
+	t_fork	*forks;
+};
+
+int		validation(int ac, char **av);
+int		ft_strlen(char *str);
+void	print_error(char *error);
+void	*start_sim(void *ph);
+
+#endif

@@ -29,22 +29,25 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-long	custom_ft_atol(char *str)
+long	ft_atol(char *str)
 {
-	long	num;
+	int		digit;
 	int		i;
+	long	num;
 
 	i = 0;
 	num = 0;
+	digit = 0;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] == '+')
 		i++;
 	while (str[i])
 	{
-		if (num > (LONG_MAX - (str[i] - '0')) / 10)
+		digit = str[i] - '0';
+		if (num > (LONG_MAX - digit) / 10)
 			return (-1);
-		num = num * 10 + (str[i] - '0');
+		num = num * 10 + digit;
 		i++;
 	}
 	return (num);

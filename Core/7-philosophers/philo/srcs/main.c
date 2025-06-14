@@ -16,7 +16,7 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	//memset
+	memset(&data, 0, sizeof(data));
 	if (validation(ac, av))
 	{
 		printf(RED"Usage: ./philo PHILOSNUM TOD TOE TOS [MEALSNUM]\n\n"RST);
@@ -24,10 +24,11 @@ int	main(int ac, char **av)
 	}
 	if (init_data(&data, ac, av))
 	{
-		clean_sim(&data);
+		print_error("data init fail.");
 		return (1);
 	}
-	// start_sim(&data);
-	// clean_sim(&data);
-	// return (0);
+	while(!data.ended)
+		;
+	clean_sim(&data, data.philos_num);
+	return (0);
 }

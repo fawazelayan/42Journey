@@ -24,13 +24,12 @@ INC_DR		=	incs
 #  ========================  #
 #	      COMMANDS			 #
 #  ========================  #
-MAKE	=	make -s -C
 RM		=	rm -rf
 
 #  ========================  #
 #		FILES AND PATHS		 #
 #  ========================  #
-SRCS	=	srcs/main.c srcs/validation.c srcs/utils.c	# Remove wild cards at campus
+SRCS	=	$(shell find $(SRCS_DR) -name '*.c')	# Remove wild cards at campus
 OBJS	=	$(patsubst $(SRCS_DR)/%.c,$(OBJS_DR)/%.o,$(SRCS))
 
 #  ========================  #
@@ -57,12 +56,11 @@ $(OBJS_DR)/%.o	:	$(SRCS_DR)/%.c
 #  ========================  #
 $(NAME)		:	$(OBJS)
 	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
-		echo "$(PURPLE)🔗 Creating philo executable...\n$(RESET)"; \
+		echo "$(PURPLE)\n🔗 Creating philo executable...\n$(RESET)"; \
+	else \
+		echo "$(GREEN)\n🔄 Rebuilding everything...$(RESET)\n"; \
 	fi
-	@$(CC) $(CFLAGS) $(OBJS) \
-	$(LIBFT) $(PRINTF) $(GNL) \
-	$(MLX_LBS) \
-	-o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 #  ========================  #
 #		  CLEANING			 #
@@ -72,16 +70,12 @@ clean	:
 		echo "$(RED)\n🧹 Cleaning object files...\n$(RESET)"; \
 	fi
 	@$(RM) $(OBJS_DR)
-	@$(MAKE) $(LIB)/$(LIBFT_DR) clean
-	@$(MAKE) $(LIB)/$(PRINTF_DR) clean
 
 fclean	:	clean
 	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
 		echo "$(RED)\n💥 Cleaning everything...\n$(RESET)"; \
 	fi
 	@$(RM) $(NAME)
-	@$(MAKE) $(LIB)/$(LIBFT_DR) fclean
-	@$(MAKE) $(LIB)/$(PRINTF_DR) fclean
 
 #  ========================  #
 #							 #

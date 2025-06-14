@@ -54,15 +54,31 @@ struct s_data
 	long	tos;	// time_to_sleep
 	long	philos_num;
 	long	meals_num;
-	long	start;
-	long	end;
+	long	start_time;
+	long	end_time;
+	int		ended;
 	t_philo	*philos;
 	t_fork	*forks;
 };
 
 int		validation(int ac, char **av);
-int		ft_strlen(char *str);
+int		invalid_args(char **args);
+int		ft_isnumber(char *str);
+int		ft_isempty(char *str);
+
 void	print_error(char *error);
+int		ft_strlen(char *str);
+long	ft_atol(char *str);
+
 void	*start_sim(void *ph);
+
+int		init_data(t_data *data, int ac, char **av);
+int		init_philos(t_data *data);
+int		init_forks(t_data *data);
+
+void	detach_thread(t_philo *philos, int cnt);
+void	join_thread(t_philo *philos, int cnt);
+void	clean_mutex(t_fork *forks, int cnt);
+int		clean_sim(t_data *data, int cnt);
 
 #endif

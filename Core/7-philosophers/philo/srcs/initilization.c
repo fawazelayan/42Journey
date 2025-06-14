@@ -54,11 +54,10 @@ int	init_philos(t_data *data)
 		data -> philos[i].id = i;
 		if (pthread_create(&data -> philos[i].thread, NULL,
 				start_sim, &data -> philos[i]))
-			return (1);
-		if (pthread_detach(data -> philos[i].thread))
-			return (1);
+			return (clean_sim(data, i));
 		i++;
 	}
+	detach_thread(data -> philos, num);
 	return (0);
 }
 
@@ -68,11 +67,18 @@ int	init_data(t_data *data, int ac, char **av)
 	data -> tod = ft_atol(av[2]);
 	data -> toe = ft_atol(av[3]);
 	data -> tos = ft_atol(av[4]);
+	data -> meals_num = -1;
 	if (ac == 6)
 		data -> meals_num = ft_atol(av[5]);
-	//data -> start = 0
-	//data -> end = 0
-	if (init_philos_forks(data))
+	if (data -> philos_num < 1 || (data -> meals_num < 1 && ac == 6)
+		|| data -> tod < 1 || data -> toe < 1 || data -> tos < 1)
+		return (1);
+	// data -> start_time = 0;
+	// data -> end_time = 0;
+	data -> ended = 0;
+	if (init_forks(data))
+		return (1);
+	if (init_philos(data))
 		return (1);
 	return (0);
 }

@@ -12,6 +12,24 @@
 
 #include "philo.h"
 
+int	init_locks(t_data *data)
+{
+	if (pthread_mutex_init(&data -> end_lk, NULL))
+		return (1);
+	if (pthread_mutex_init(&data -> prt_lk, NULL))
+	{
+		pthread_mutex_destroy(&data -> end_lk);
+		return (1);
+	}
+	if (pthread_mutex_init(&data -> eat_lk, NULL))
+	{
+		pthread_mutex_destroy(&data -> end_lk);
+		pthread_mutex_destroy(&data -> prt_lk);
+		return (1);
+	}
+	return (0);
+}
+
 int	init_forks(t_data *data)
 {
 	int	i;
@@ -73,16 +91,11 @@ int	init_data(t_data *data, int ac, char **av)
 	if (data -> philos_num < 1 || (data -> meals_num < 1 && ac == 6)
 		|| data -> tod < 1 || data -> toe < 1 || data -> tos < 1)
 		return (1);
-	data -> start_time = get_time_in_ms();
-	data -> end_time = 0;
+	data -> st = get_time_in_ms();
+	data -> et = 0;
 	data -> ended = 0;
-	if (pthread_mutex_init(&data -> end, NULL))
+	if (init_locks(data))
 		return (1);
-	if (pthread_mutex_init(&data -> meal, NULL))
-	{
-		pthread_mutex_destroy(&data -> end);
-		return (1);
-	}
 	if (init_forks(data))
 		return (1);
 	if (init_philos(data))

@@ -27,9 +27,8 @@ int	main(int ac, char **av)
 		print_error("data init fail.");
 		return (1);
 	}
-	while(!data.ended)
+	while (!data.ended)
 		usleep(5000);
-	get_time_in_ms();
 	clean_sim(&data, data.philos_num);
 	return (0);
 }

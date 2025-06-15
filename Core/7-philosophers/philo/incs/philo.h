@@ -55,11 +55,12 @@ struct s_data
 	long	tos;	// time_to_sleep
 	long	philos_num;
 	long	meals_num;
-	long	start_time;
-	long	end_time;
-	int		ended;
-	pthread_mutex_t	meal;
-	pthread_mutex_t	end;
+	long	st;		// start_time
+	long	et;		// end_time
+	int		ended;	// death or all philos are full
+	pthread_mutex_t	eat_lk;
+	pthread_mutex_t	end_lk;
+	pthread_mutex_t prt_lk;
 	t_philo	*philos;
 	t_fork	*forks;
 };
@@ -77,6 +78,7 @@ void	*start_sim(void *ph);
 
 int		init_data(t_data *data, int ac, char **av);
 int		init_philos(t_data *data);
+int		init_locks(t_data *data);
 int		init_forks(t_data *data);
 
 void	detach_thread(t_philo *philos, int cnt);
@@ -88,6 +90,6 @@ long	get_time_in_ms(void);
 
 void    is_eating(t_philo *philo);
 void    is_sleeping(t_philo *philo);
-void is_dead(t_philo *philo);
+void	is_dead(t_philo *philo);
 
 #endif

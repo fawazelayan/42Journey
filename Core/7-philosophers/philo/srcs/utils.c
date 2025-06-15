@@ -52,3 +52,11 @@ long	ft_atol(char *str)
 	}
 	return (num);
 }
+
+long	get_time_in_ms(void)
+{
+	struct timeval time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000L) + (time.tv_usec / 1000));
+}

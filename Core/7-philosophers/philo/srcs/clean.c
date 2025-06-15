@@ -1,6 +1,6 @@
 #include "philo.h"
 
-void	clean_mutex(t_fork *forks, int cnt)
+void	destroy_mutex(t_fork *forks, int cnt)
 {
 	int	i;
 
@@ -45,7 +45,7 @@ int	clean_sim(t_data *data, int cnt)
 		return (1);
 	if (data -> forks)
 	{
-		clean_mutex(data -> forks, data -> philos_num);
+		destroy_mutex(data -> forks, data -> philos_num);
 		data -> forks = NULL;
 	}
 	if (data -> philos)

@@ -24,7 +24,7 @@ int	init_forks(t_data *data)
 	{
 		if (pthread_mutex_init(&data -> forks[i].mutex, NULL))
 		{
-			clean_mutex(data -> forks, i);
+			destroy_mutex(data -> forks, i);
 			return (1);
 		}
 		data -> forks[i].id = i;
@@ -73,9 +73,16 @@ int	init_data(t_data *data, int ac, char **av)
 	if (data -> philos_num < 1 || (data -> meals_num < 1 && ac == 6)
 		|| data -> tod < 1 || data -> toe < 1 || data -> tos < 1)
 		return (1);
-	// data -> start_time = 0;
-	// data -> end_time = 0;
+	data -> start_time = get_time_in_ms();
+	data -> end_time = 0;
 	data -> ended = 0;
+	if (pthread_mutex_init(&data -> end, NULL))
+		return (1);
+	if (pthread_mutex_init(&data -> meal, NULL))
+	{
+		pthread_mutex_destroy(&data -> end);
+		return (1);
+	}
 	if (init_forks(data))
 		return (1);
 	if (init_philos(data))

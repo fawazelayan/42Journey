@@ -12,21 +12,21 @@
 
 #include "philo.h"
 
-void	*start_sim(void *ph)
+void	*start_sim(void *philo)
 {
-	t_philo	*philo;
+	t_philo	*ph;
 	long	elapsed_time;
 
-	philo = (t_philo *)ph;
-	elapsed_time = get_time_in_ms() - philo -> table -> st;
-	if (philo -> table -> ended)
+	ph = (t_philo *)philo;
+	elapsed_time = get_time_in_ms() - ph -> table -> st;
+	if (ph -> table -> ended)
 		return (NULL);
-	while (!philo -> table -> ended)
+	while (!ph -> table -> ended)
 	{
 		//philo_take
-		is_eating(philo);
-		is_sleeping(philo);
-		is_dead(philo);
+		is_eating(ph);
+		is_sleeping(ph);
+		is_dead(ph);
 	}
 	return (NULL);
 }

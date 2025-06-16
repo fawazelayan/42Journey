@@ -19,6 +19,22 @@ void	print_error(char *error)
 	write(2, "\n", 1);
 }
 
+void	print_action(t_philo *ph, long stamp, char *act)
+{
+	pthread_mutex_lock(&ph -> table -> prt_lk);
+	if (!ft_strcmp(act, "has taken a fork"))
+		printf(CYN"%ld\tPhilo %d\t%s\n"RST, stamp, ph -> id, act);
+	else if (!ft_strcmp(act, "is eating"))
+		printf(GRN"%ld\tPhilo %d\t%s\n"RST, stamp, ph -> id, act);
+	else if (!ft_strcmp(act, "is sleeping"))
+		printf(PRP"%ld\tPhilo %d\t%s\n"RST, stamp, ph -> id, act);
+	else if (!ft_strcmp(act, "is thinking"))
+		printf(YLW"%ld\tPhilo %d\t%s\n"RST, stamp, ph -> id, act);
+	else if (!ft_strcmp(act, "has died"))
+		printf(RED"%ld\tPhilo %d\t%s\n"RST, stamp - ph -> table -> st, ph -> id, act);
+	pthread_mutex_unlock(&ph -> table -> prt_lk);
+}
+
 int	ft_strlen(char *str)
 {
 	int	i;

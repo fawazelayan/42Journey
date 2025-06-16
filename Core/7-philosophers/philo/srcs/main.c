@@ -27,8 +27,9 @@ int	main(int ac, char **av)
 		print_error("data init fail.");
 		return (1);
 	}
-	while (!data.ended)
-		usleep(5000);
+	pthread_join(data.death, NULL);
+	// while (!data.ended)
+	// 	usleep(5000);
 	clean_sim(&data, data.philos_num);
 	return (0);
 }

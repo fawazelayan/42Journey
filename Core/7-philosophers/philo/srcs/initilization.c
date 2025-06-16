@@ -94,6 +94,7 @@ int	init_data(t_data *data, int ac, char **av)
 	data -> st = get_time_in_ms();
 	data -> et = 0;
 	data -> ended = 0;
+	pthread_create(&data -> death, NULL, is_dead, data);
 	if (init_locks(data))
 		return (1);
 	if (init_forks(data))

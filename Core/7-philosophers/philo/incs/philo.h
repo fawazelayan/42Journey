@@ -21,6 +21,7 @@
 # include <stdio.h> // printf
 # include <limits.h> // LONG_MAX
 
+# define CYN    "\033[0;36m"
 # define PRP	"\033[0;35m"
 # define YLW	"\033[0;33m"
 # define GRN	"\033[0;32m"
@@ -37,12 +38,12 @@ typedef struct s_fork
 
 typedef struct s_philo
 {
-	long		lmt;	// last_meal_time
 	long		meal_cntr;
+	long		lmt;	// last_meal_time
+	pthread_t	thread;
+	t_data		*table;
 	t_fork		*right;
 	t_fork		*left;
-	t_data		*table;
-	pthread_t	thread;
 	int			full;
 	int			id;
 
@@ -50,19 +51,20 @@ typedef struct s_philo
 
 struct s_data
 {
-	long	tod;	// time_to_die
-	long	toe;	// time_to_eat
-	long	tos;	// time_to_sleep
-	long	philos_num;
-	long	meals_num;
-	long	st;		// start_time
-	long	et;		// end_time
-	int		ended;	// death or all philos are full
+	long			philos_num;
+	long			meals_num;
+	t_philo			*philos;
+	t_fork			*forks;
 	pthread_mutex_t	eat_lk;
 	pthread_mutex_t	end_lk;
-	pthread_mutex_t prt_lk;
-	t_philo	*philos;
-	t_fork	*forks;
+	pthread_mutex_t	prt_lk;
+	pthread_t		death;
+	int				ended;	// death or all philos are full
+	long			tod;	// time_to_die
+	long			toe;	// time_to_eat
+	long			tos;	// time_to_sleep
+	long			st;		// start_time
+	long			et;		// end_time
 };
 
 int		validation(int ac, char **av);
@@ -73,7 +75,8 @@ int		ft_isempty(char *str);
 void	print_error(char *error);
 int		ft_strlen(char *str);
 long	ft_atol(char *str);
-
+void	print_action(t_philo *ph, long stamp, char *act);
+int		ft_strcmp(const char *s1, const char *s2);
 void	*start_sim(void *ph);
 
 int		init_data(t_data *data, int ac, char **av);
@@ -88,8 +91,8 @@ int		clean_sim(t_data *data, int cnt);
 
 long	get_time_in_ms(void);
 
-void    is_eating(t_philo *philo);
-void    is_sleeping(t_philo *philo);
+void	is_sleeping(t_philo *philo);
+void	is_eating(t_philo *philo);
 void	is_dead(t_philo *philo);
 
 #endif

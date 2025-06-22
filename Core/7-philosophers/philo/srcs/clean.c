@@ -12,63 +12,21 @@
 
 #include "philo.h"
 
-void	destroy_mutex(t_fork *forks, int cnt)
+void	clean_sim(t_data *data)
 {
-	int	i;
+	t_philo	*ph;
+	int		i;
 
 	i = 0;
-	if (!forks)
-		return ;
-	while (i < cnt)
+	while (i < data -> ph_num)
 	{
-		pthread_mutex_destroy(&forks[i].mutex);
+		ph = data -> philos + i;
+		mutex_opers(&ph -> eat_lk, DESTROY);
+		mutex_opers(&data -> forks[i].mutex, DESTROY);
 		i++;
 	}
-	free(forks);
-}
-
-void	join_thread(t_philo *philos, int cnt)
-{
-	int	i;
-
-	i = 0;
-	while (i < cnt)
-	{
-		pthread_join(philos[i].thread, NULL);
-		i++;
-	}
-}
-
-void	detach_thread(t_philo *philos, int cnt)
-{
-	int	i;
-
-	i = 0;
-	while (i < cnt)
-	{
-		pthread_detach(philos[i].thread);
-		i++;
-	}
-}
-
-int	clean_sim(t_data *data, int cnt)
-{
-	if (!data)
-		return (1);
-	if (data -> forks)
-	{
-		destroy_mutex(data -> forks, data -> philos_num);
-		data -> forks = NULL;
-	}
-	if (data -> philos)
-	{
-		if (cnt < data -> philos_num)
-		{
-			data -> ended = 1;
-			join_thread(data -> philos, cnt);
-		}
-		free(data -> philos);
-		data -> philos = NULL;
-	}
-	return (1);
+	mutex_opers(&data -> dat_lk, DESTROY);
+	mutex_opers(&data -> prt_lk, DESTROY);
+	free(data -> forks);
+	free(data -> philos);
 }

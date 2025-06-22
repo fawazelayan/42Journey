@@ -15,27 +15,34 @@
 void	print_error(char *error)
 {
 	write(2, "\nError: ", 8);
-	write(2, error, ft_strlen(error));
+	write(2, error, str_len(error));
 	write(2, "\n", 1);
 }
 
-void	print_action(t_philo *ph, long stamp, char *act)
+void	print_action(t_philo *ph, t_ph_status st)
 {
-	pthread_mutex_lock(&ph -> table -> prt_lk);
-	if (!ft_strcmp(act, "has taken a fork"))
-		printf(CYN"%ld\tPhilo %d\t%s\n"RST, stamp, ph -> id, act);
-	else if (!ft_strcmp(act, "is eating"))
-		printf(GRN"%ld\tPhilo %d\t%s\n"RST, stamp, ph -> id, act);
-	else if (!ft_strcmp(act, "is sleeping"))
-		printf(PRP"%ld\tPhilo %d\t%s\n"RST, stamp, ph -> id, act);
-	else if (!ft_strcmp(act, "is thinking"))
-		printf(YLW"%ld\tPhilo %d\t%s\n"RST, stamp, ph -> id, act);
-	else if (!ft_strcmp(act, "has died"))
-		printf(RED"%ld\tPhilo %d\t%s\n"RST, stamp - ph -> table -> st, ph -> id, act);
-	pthread_mutex_unlock(&ph -> table -> prt_lk);
+	long	stamp;
+
+	stamp = get_time_in_ms() - ph -> table -> st;
+	if (ph -> full)
+		return ;
+	mutex_opers(&ph -> table -> prt_lk, LOCK);
+	if ((st == TAKEN_FST || st == TAKE_SEC) && !sim_fin(ph -> table))
+		printf(YLW"%ld\tPhilo %d has taken a fork\n"RST, stamp, ph -> id);
+	else if (st == EAT && !sim_fin(ph -> table))
+		printf(GRN"%ld\tPhilo %d is eating\n"RST, stamp, ph -> id);
+	else if (st == SLEEP && !sim_fin(ph -> table))
+		printf(PRP"%ld\tPhilo %d is sleeping\n"RST,  stamp, ph -> id);
+	else if (st == THINK && !sim_fin(ph -> table))
+		printf(CYN"%ld\tPhilo %d is thinking\n"RST, stamp, ph -> id);
+	else if (st == DEAD && sim_fin(ph -> table))
+		printf(RED"%ld\tPhilo %d has died\n"RST, stamp,  ph -> id);
+	else
+		return ;
+	mutex_opers(&ph -> table -> prt_lk, UNLOCK);
 }
 
-int	ft_strlen(char *str)
+int	str_len(char *str)
 {
 	int	i;
 

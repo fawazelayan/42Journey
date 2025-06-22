@@ -12,14 +12,14 @@
 
 #include "philo.h"
 
-int	ft_isempty(char *str)
+static bool	is_empty(char *str)
 {
-	if (!str || !ft_strlen(str))
-		return (1);
-	return (0);
+	if (!str || !str_len(str))
+		return (true);
+	return (false);
 }
 
-int	ft_isnumber(char *str)
+static bool	is_num(char *str)
 {
 	int	i;
 
@@ -29,41 +29,41 @@ int	ft_isnumber(char *str)
 	if (str[i] == '+')
 		i++;
 	if (!str[i])
-		return (0);
+		return (false);
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return (0);
+			return (false);
 		i++;
 	}
-	return (1);
+	return (true);
 }
 
-int	invalid_args(char **args)
+static bool	invalid_args(char **args)
 {
 	int	i;
 
 	i = 1;
 	while (args[i])
 	{
-		if (ft_isempty(args[i]) || !ft_isnumber(args[i]))
-			return (1);
+		if (is_empty(args[i]) || !is_num(args[i]))
+			return (true);
 		i++;
 	}
-	return (0);
+	return (false);
 }
 
-int	validation(int ac, char **av)
+bool	is_valid_prog(int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
 	{
 		print_error("wrong number of arguments.");
-		return (1);
+		return (false);
 	}
 	else if (invalid_args(av))
 	{
 		print_error("argument must be a positive number.");
-		return (1);
+		return (false);
 	}
-	return (0);
+	return (true);
 }

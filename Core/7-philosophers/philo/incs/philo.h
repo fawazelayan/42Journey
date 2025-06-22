@@ -13,86 +13,123 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <sys/time.h> // gettimeofday
-# include <pthread.h> // pthread functions
-# include <string.h> // memset
-# include <unistd.h> // usleep, write
-# include <stdlib.h> // malloc, free
-# include <stdio.h> // printf
-# include <limits.h> // LONG_MAX
-
-# define CYN    "\033[0;36m"
+# define CYN	"\033[0;36m"
 # define PRP	"\033[0;35m"
 # define YLW	"\033[0;33m"
 # define GRN	"\033[0;32m"
 # define RED	"\033[0;31m"
 # define RST	"\033[0m"
 
+# include <sys/time.h>	// gettimeofday
+# include <pthread.h>	// pthread functions
+# include <string.h>	// memset
+# include <unistd.h>	// usleep, write
+# include <stdlib.h>	// malloc, free
+# include <stdio.h>		// printf
+# include <limits.h>	// LONG_MAX
+# include <stdbool.h>	// bool type
+# include <errno.h>		// error checking for pthread functions
+
 typedef struct s_data	t_data;
+typedef pthread_mutex_t	t_mtx;
+typedef pthread_t		t_thr;
+
+typedef enum e_ph_status
+{
+	TAKEN_FST,
+	TAKE_SEC,
+	SLEEP,
+	THINK,
+	DEAD,
+	EAT
+}	t_ph_status;
+
+typedef enum e_code
+{
+	DESTROY,
+	UNLOCK,
+	LOCK,
+	INIT,
+	CRT,
+	JOIN,
+	DETACH
+}	t_code;
 
 typedef struct s_fork
 {
-	pthread_mutex_t	mutex;
-	int				id;
+	t_mtx	mutex;	// mutex for each fork to use locks
+	int		id;		// id for each fork
 }	t_fork;
 
 typedef struct s_philo
 {
-	long		meal_cntr;
+	long		ml_cnt;	// meal counter
 	long		lmt;	// last_meal_time
-	pthread_t	thread;
-	t_data		*table;
-	t_fork		*right;
-	t_fork		*left;
-	int			full;
-	int			id;
-
+	t_thr	thread;	// thread for each philo
+	t_data		*table;	// each philo gets access to data (global data)
+	t_fork		*first;	// right fork
+	t_fork		*scnd;	// left fork
+	t_mtx		eat_lk;	// lock to read and write lmt
+	bool		full;	// full flag
+	int			id;		// id for each philo
 }	t_philo;
 
 struct s_data
 {
-	long			philos_num;
-	long			meals_num;
-	t_philo			*philos;
-	t_fork			*forks;
-	pthread_mutex_t	eat_lk;
-	pthread_mutex_t	end_lk;
-	pthread_mutex_t	prt_lk;
-	pthread_t		death;
-	int				ended;	// death or all philos are full
-	long			tod;	// time_to_die
-	long			toe;	// time_to_eat
-	long			tos;	// time_to_sleep
-	long			st;		// start_time
-	long			et;		// end_time
+	t_philo			*philos;	// philos array
+	t_thr			monitor;		// death monitor
+	t_fork			*forks;		// forks array
+	t_mtx			dat_lk;		// data lock to read and write
+	t_mtx			prt_lk;		// print locks to not overlap actions
+	long			ml_num;		// meals num
+	long			ph_num;		// philos num
+	long			th_up;		// how many threads are running
+	long			tod;		// time_to_die
+	long			toe;		// time_to_eat
+	long			tos;		// time_to_sleep
+	long			st;			// start_time
+	long			et;			// end_time
+	bool			ended;		// death or all philos are full
+	bool			wait;
 };
 
-int		validation(int ac, char **av);
-int		invalid_args(char **args);
-int		ft_isnumber(char *str);
-int		ft_isempty(char *str);
+// static bool	is_empty(char *str);
+// static bool	is_num(char *str);
+// static bool	invalid_args(char **args);
+bool	is_valid_prog(int ac, char **av);
 
 void	print_error(char *error);
-int		ft_strlen(char *str);
+void	print_action(t_philo *ph, t_ph_status st);
+int		str_len(char *str);
 long	ft_atol(char *str);
-void	print_action(t_philo *ph, long stamp, char *act);
-int		ft_strcmp(const char *s1, const char *s2);
-void	*start_sim(void *ph);
-
-int		init_data(t_data *data, int ac, char **av);
-int		init_philos(t_data *data);
-int		init_locks(t_data *data);
-int		init_forks(t_data *data);
-
-void	detach_thread(t_philo *philos, int cnt);
-void	join_thread(t_philo *philos, int cnt);
-void	destroy_mutex(t_fork *forks, int cnt);
-int		clean_sim(t_data *data, int cnt);
-
 long	get_time_in_ms(void);
+void	parse_input(t_data *data, int ac, char **av);
+void	mutex_opers(t_mtx *mtx, t_code code);
+void	thread_opers(t_thr *thr, void * (*foo)(void *), void *data, t_code cd);
+void	precise_usleep(t_data *data, long time);
+void	increase_long(t_mtx *mtx, long *val);
 
-void	is_sleeping(t_philo *philo);
-void	is_eating(t_philo *philo);
-void	is_dead(t_philo *philo);
+// static bool is_dead(t_philo *ph);
+void	wait_threads(t_data *dt);
+bool	threads_active(t_mtx *mtx, long *th, long ph_num);
+void	*monitoring(void *data);
+void	de_synchro(t_philo *ph);
 
+// static void	assign_forks(t_philo *philo, t_fork *fork, int pos);
+// static void	init_philo(t_data *data);
+int		init_data(t_data *data, int ac, char **av);
+
+void	set_bool(t_mtx *mtx, bool *set, bool val);
+bool	get_bool(t_mtx *mtx, bool *val);
+void	set_long(t_mtx *mtx, long *set, long val);
+long	get_long(t_mtx *mtx, long *val);
+bool	sim_fin(t_data *data);
+
+// static void	eat(t_philo *ph);
+void	*im_mr_lonely(void *data);
+void	think(t_philo *ph, bool in_dinner);
+void	*start_dinner(void *philo);
+void	start_sim(t_data *data);
+
+void	clean_sim(t_data *data);
 #endif

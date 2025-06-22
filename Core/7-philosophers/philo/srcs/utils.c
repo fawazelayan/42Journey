@@ -12,21 +12,23 @@
 
 #include "philo.h"
 
-void	print_error(char *error)
+int	print_error_ret(char *error, int ret)
 {
 	write(2, "\nError: ", 8);
 	write(2, error, str_len(error));
-	write(2, "\n", 1);
+	write(2, ".\n\n", 3);
+	return (ret);
 }
 
-void	print_action(t_philo *ph, t_ph_status st)
+int	print_action(t_philo *ph, t_ph_status st)
 {
 	long	stamp;
 
 	stamp = get_time_in_ms() - ph -> table -> st;
 	if (ph -> full)
-		return ;
-	mutex_opers(&ph -> table -> prt_lk, LOCK);
+		return (0);
+	if (mutex_opers(&ph -> table -> prt_lk, LOCK))
+		return (print_error_ret("print failed to lock", 1));
 	if ((st == TAKEN_FST || st == TAKE_SEC) && !sim_fin(ph -> table))
 		printf(YLW"%ld\tPhilo %d has taken a fork\n"RST, stamp, ph -> id);
 	else if (st == EAT && !sim_fin(ph -> table))
@@ -37,9 +39,9 @@ void	print_action(t_philo *ph, t_ph_status st)
 		printf(CYN"%ld\tPhilo %d is thinking\n"RST, stamp, ph -> id);
 	else if (st == DEAD && sim_fin(ph -> table))
 		printf(RED"%ld\tPhilo %d has died\n"RST, stamp,  ph -> id);
-	else
-		return ;
-	mutex_opers(&ph -> table -> prt_lk, UNLOCK);
+	if (mutex_opers(&ph -> table -> prt_lk, UNLOCK))
+		return (print_error_ret("print failed to unlock", 1));
+	return (0);
 }
 
 int	str_len(char *str)
@@ -68,7 +70,7 @@ long	ft_atol(char *str)
 	while (str[i])
 	{
 		digit = str[i] - '0';
-		if (num > (LONG_MAX - digit) / 10)
+		if (num > INT_MAX)
 			return (-1);
 		num = num * 10 + digit;
 		i++;

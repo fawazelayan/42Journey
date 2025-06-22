@@ -11,29 +11,49 @@ void	parse_input(t_data *data, int ac, char **av)
 		data -> ml_num = ft_atol(av[4]);
 }
 
-void	mutex_opers(t_mtx *mtx, t_code code)
+int	mutex_opers(t_mtx *mtx, t_code code)
 {
 	if (code == INIT)
-		pthread_mutex_init(mtx, NULL);
+	{
+		if (pthread_mutex_init(mtx, NULL))
+			return (print_error_ret("mutex failed to init", 1));
+	}
 	else if (code == LOCK)
-		pthread_mutex_lock(mtx);
+	{
+		if (pthread_mutex_lock(mtx))
+			return (print_error_ret("mutex failed to lock", 1));
+	}
 	else if (code == UNLOCK)
-		pthread_mutex_unlock(mtx);
+	{
+		if (pthread_mutex_unlock(mtx))
+			return (print_error_ret("mutex failed to unlock", 1));
+	}
 	else if (code == DESTROY)
-		pthread_mutex_destroy(mtx);
-	else
-		return ;
+	{
+		if (pthread_mutex_destroy(mtx))
+			return (print_error_ret("mutex failed to destroy", 1));
+	}	
+	return (0);
 }
 
-void	thread_opers(t_thr *thr, void * (*foo)(void *), void *data, t_code cd)
+int	thr_ops(t_thr *thr, void * (*foo)(void *), void *data, t_code cd)
 {
 	if (cd == CRT)
-		pthread_create(thr, NULL, foo, data);
+	{
+		if (pthread_create(thr, NULL, foo, data))
+			return (print_error_ret("thread failed to create", 1));
+	}
 	else if (cd == JOIN)
-		pthread_join(*thr, NULL);
+	{
+		if (pthread_join(*thr, NULL))
+			return (print_error_ret("thread failed to join", 1));
+	}
 	else if (cd == DETACH)
-		pthread_detach(*thr);
-	return ;
+	{
+		if (pthread_detach(*thr))
+			return (print_error_ret("thread failed to detach", 1));
+	}
+	return (0);
 }
 
 void	precise_usleep(t_data *data, long time)

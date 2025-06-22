@@ -65,11 +65,11 @@ typedef struct s_philo
 {
 	long		ml_cnt;	// meal counter
 	long		lmt;	// last_meal_time
-	t_thr	thread;	// thread for each philo
 	t_data		*table;	// each philo gets access to data (global data)
 	t_fork		*first;	// right fork
-	t_fork		*scnd;	// left fork
 	t_mtx		eat_lk;	// lock to read and write lmt
+	t_fork		*scnd;	// left fork
+	t_thr		thr;	// thread for each philo
 	bool		full;	// full flag
 	int			id;		// id for each philo
 }	t_philo;
@@ -98,14 +98,14 @@ struct s_data
 // static bool	invalid_args(char **args);
 bool	is_valid_prog(int ac, char **av);
 
-void	print_error(char *error);
-void	print_action(t_philo *ph, t_ph_status st);
+int		print_error_ret(char *error, int ret);
+int		print_action(t_philo *ph, t_ph_status st);
 int		str_len(char *str);
 long	ft_atol(char *str);
 long	get_time_in_ms(void);
 void	parse_input(t_data *data, int ac, char **av);
-void	mutex_opers(t_mtx *mtx, t_code code);
-void	thread_opers(t_thr *thr, void * (*foo)(void *), void *data, t_code cd);
+int		mutex_opers(t_mtx *mtx, t_code code);
+int		thr_ops(t_thr *thr, void * (*foo)(void *), void *data, t_code cd);
 void	precise_usleep(t_data *data, long time);
 void	increase_long(t_mtx *mtx, long *val);
 
@@ -115,6 +115,8 @@ bool	threads_active(t_mtx *mtx, long *th, long ph_num);
 void	*monitoring(void *data);
 void	de_synchro(t_philo *ph);
 
+int 	create_threads(t_data *dt);
+int 	join_threads(t_data *dt);
 // static void	assign_forks(t_philo *philo, t_fork *fork, int pos);
 // static void	init_philo(t_data *data);
 int		init_data(t_data *data, int ac, char **av);
@@ -127,9 +129,9 @@ bool	sim_fin(t_data *data);
 
 // static void	eat(t_philo *ph);
 void	*im_mr_lonely(void *data);
-void	think(t_philo *ph, bool in_dinner);
-void	*start_dinner(void *philo);
-void	start_sim(t_data *data);
+int		think(t_philo *ph, bool in_dinner);
+void	*dine_in(void *philo);
+int		start_sim(t_data *data);
 
 void	clean_sim(t_data *data);
 #endif

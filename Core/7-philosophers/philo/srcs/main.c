@@ -16,18 +16,16 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	memset(&data, 0, sizeof(data)); 
+	memset(&data, 0, sizeof(data));
 	if (!is_valid_prog(ac, av))
 	{
 		printf(RED"Usage: ./philo PHILOSNUM TOD TOE TOS [MEALSNUM]\n\n"RST);
 		return (1);
 	}
 	if (init_data(&data, ac, &av[1]))
-	{
-		print_error("data init fail.");
-		return (1);
-	}
-	start_sim(&data);
+		return (print_error_ret("data init failed", 1));
+	if (start_sim(&data))
+		return (print_error_ret("simulation failed to start", 1));
 	clean_sim(&data);
 	return (0);
 }

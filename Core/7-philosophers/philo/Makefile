@@ -36,7 +36,7 @@ OBJS	=	$(patsubst $(SRCS_DR)/%.c,$(OBJS_DR)/%.o,$(SRCS))
 #	   COMPILATION RULES	 #
 #  ========================  #
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -I$(INC_DR)
+CFLAGS	=	-Wall -Wextra -Werror -I$(INC_DR) -pthread
 #  ========================  #
 #			RULES			 #
 #  ========================  #

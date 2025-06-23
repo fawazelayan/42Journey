@@ -56,14 +56,8 @@ static bool	invalid_args(char **args)
 bool	is_valid_prog(int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
-	{
-		print_error_ret("wrong number of arguments.");
-		return (false);
-	}
+		return (print_error_ret("invalid number of arguments", 0));
 	else if (invalid_args(av))
-	{
-		print_error_ret("argument must be a positive number.");
-		return (false);
-	}
+		return (print_error_ret("argument must be a positive number.", 0));
 	return (true);
 }

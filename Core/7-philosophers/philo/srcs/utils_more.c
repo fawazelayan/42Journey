@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_more.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: felayan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/23 03:31:38 by felayan           #+#    #+#             */
+/*   Updated: 2025/06/23 03:31:40 by felayan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	parse_input(t_data *data, int ac, char **av)
 {
-	data -> ph_num  = ft_atol(av[0]);
+	data -> ph_num = ft_atol(av[0]);
 	data -> tod = ft_atol(av[1]);
 	data -> toe = ft_atol(av[2]);
 	data -> tos = ft_atol(av[3]);
@@ -32,11 +44,11 @@ int	mutex_opers(t_mtx *mtx, t_code code)
 	{
 		if (pthread_mutex_destroy(mtx))
 			return (print_error_ret("mutex failed to destroy", 1));
-	}	
+	}
 	return (0);
 }
 
-int	thr_ops(t_thr *thr, void * (*foo)(void *), void *data, t_code cd)
+int	thr_ops(t_thr *thr, void *(*foo)(void *), void *data, t_code cd)
 {
 	if (cd == CRT)
 	{
@@ -47,11 +59,6 @@ int	thr_ops(t_thr *thr, void * (*foo)(void *), void *data, t_code cd)
 	{
 		if (pthread_join(*thr, NULL))
 			return (print_error_ret("thread failed to join", 1));
-	}
-	else if (cd == DETACH)
-	{
-		if (pthread_detach(*thr))
-			return (print_error_ret("thread failed to detach", 1));
 	}
 	return (0);
 }

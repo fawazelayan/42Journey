@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void	clean_sim(t_data *data)
+int	clean_sim(t_data *data)
 {
 	t_philo	*ph;
 	int		i;
@@ -21,12 +21,17 @@ void	clean_sim(t_data *data)
 	while (i < data -> ph_num)
 	{
 		ph = data -> philos + i;
-		mutex_opers(&ph -> eat_lk, DESTROY);
-		mutex_opers(&data -> forks[i].mutex, DESTROY);
+		if (mutex_opers(&ph -> eat_lk, DESTROY))
+			return (print_error_ret("philo mutex failed to destroy", 1));
+		if (mutex_opers(&data -> forks[i].mutex, DESTROY))
+			return (print_error_ret("fork mutex failed to destroy", 1));
 		i++;
 	}
-	mutex_opers(&data -> dat_lk, DESTROY);
-	mutex_opers(&data -> prt_lk, DESTROY);
+	if (mutex_opers(&data -> dat_lk, DESTROY))
+		return (print_error_ret("data mutex failed to destroy", 1));
+	if (mutex_opers(&data -> prt_lk, DESTROY))
+		return (print_error_ret("print mutex failed to destroy", 1));
 	free(data -> forks);
 	free(data -> philos);
+	return (0);
 }

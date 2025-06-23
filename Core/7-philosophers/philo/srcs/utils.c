@@ -34,11 +34,11 @@ int	print_action(t_philo *ph, t_ph_status st)
 	else if (st == EAT && !sim_fin(ph -> table))
 		printf(GRN"%ld\tPhilo %d is eating\n"RST, stamp, ph -> id);
 	else if (st == SLEEP && !sim_fin(ph -> table))
-		printf(PRP"%ld\tPhilo %d is sleeping\n"RST,  stamp, ph -> id);
+		printf(PRP"%ld\tPhilo %d is sleeping\n"RST, stamp, ph -> id);
 	else if (st == THINK && !sim_fin(ph -> table))
 		printf(CYN"%ld\tPhilo %d is thinking\n"RST, stamp, ph -> id);
 	else if (st == DEAD && sim_fin(ph -> table))
-		printf(RED"%ld\tPhilo %d has died\n"RST, stamp,  ph -> id);
+		printf(RED"%ld\tPhilo %d has died\n"RST, stamp, ph -> id);
 	if (mutex_opers(&ph -> table -> prt_lk, UNLOCK))
 		return (print_error_ret("print failed to unlock", 1));
 	return (0);

@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*  ========================  */
+/*		   DEFINITIONS		  */
+/*  ========================  */
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -20,16 +23,21 @@
 # define RED	"\033[0;31m"
 # define RST	"\033[0m"
 
+/*  ========================  */
+/*			INCLUDES		  */
+/*  ========================  */
 # include <sys/time.h>	// gettimeofday
 # include <pthread.h>	// pthread functions
 # include <string.h>	// memset
 # include <unistd.h>	// usleep, write
 # include <stdlib.h>	// malloc, free
 # include <stdio.h>		// printf
-# include <limits.h>	// LONG_MAX
+# include <limits.h>	// INT_MAX
 # include <stdbool.h>	// bool type
-# include <errno.h>		// error checking for pthread functions
 
+/*  ========================  */
+/*		STRUCTS & ENUMS		  */
+/*  ========================  */
 typedef struct s_data	t_data;
 typedef pthread_mutex_t	t_mtx;
 typedef pthread_t		t_thr;
@@ -51,8 +59,7 @@ typedef enum e_code
 	LOCK,
 	INIT,
 	CRT,
-	JOIN,
-	DETACH
+	JOIN
 }	t_code;
 
 typedef struct s_fork
@@ -63,14 +70,14 @@ typedef struct s_fork
 
 typedef struct s_philo
 {
-	long		ml_cnt;	// meal counter
-	long		lmt;	// last_meal_time
 	t_data		*table;	// each philo gets access to data (global data)
 	t_fork		*first;	// right fork
 	t_mtx		eat_lk;	// lock to read and write lmt
 	t_fork		*scnd;	// left fork
 	t_thr		thr;	// thread for each philo
 	bool		full;	// full flag
+	long		ml_cnt;	// meal counter
+	long		lmt;	// last_meal_time
 	int			id;		// id for each philo
 }	t_philo;
 
@@ -93,45 +100,53 @@ struct s_data
 	bool			wait;
 };
 
-// static bool	is_empty(char *str);
-// static bool	is_num(char *str);
-// static bool	invalid_args(char **args);
+/*  ========================  */
+/*		VALIDATION FUNCS	  */
+/*  ========================  */
 bool	is_valid_prog(int ac, char **av);
 
-int		print_error_ret(char *error, int ret);
+/*  ========================  */
+/*		  UTILS FUNCS		  */
+/*  ========================  */
+int		thr_ops(t_thr *thr, void *(*foo)(void *), void *data, t_code cd);
 int		print_action(t_philo *ph, t_ph_status st);
-int		str_len(char *str);
-long	ft_atol(char *str);
-long	get_time_in_ms(void);
-void	parse_input(t_data *data, int ac, char **av);
+int		print_error_ret(char *error, int ret);
 int		mutex_opers(t_mtx *mtx, t_code code);
-int		thr_ops(t_thr *thr, void * (*foo)(void *), void *data, t_code cd);
+int		create_threads(t_data *dt);
+int		join_threads(t_data *dt);
+int		str_len(char *str);
+bool	threads_active(t_mtx *mtx, long *th, long ph_num);
+bool	get_bool(t_mtx *mtx, bool *val);
+bool	sim_fin(t_data *data);
+void	parse_input(t_data *data, int ac, char **av);
+void	set_bool(t_mtx *mtx, bool *set, bool val);
+void	set_long(t_mtx *mtx, long *set, long val);
 void	precise_usleep(t_data *data, long time);
 void	increase_long(t_mtx *mtx, long *val);
-
-// static bool is_dead(t_philo *ph);
 void	wait_threads(t_data *dt);
-bool	threads_active(t_mtx *mtx, long *th, long ph_num);
-void	*monitoring(void *data);
 void	de_synchro(t_philo *ph);
+long	get_long(t_mtx *mtx, long *val);
+long	ft_atol(char *str);
+long	get_time_in_ms(void);
+void	*monitoring(void *data);
 
-int 	create_threads(t_data *dt);
-int 	join_threads(t_data *dt);
-// static void	assign_forks(t_philo *philo, t_fork *fork, int pos);
-// static void	init_philo(t_data *data);
+/*  ========================  */
+/*		  INIT FUNCS		  */
+/*  ========================  */
 int		init_data(t_data *data, int ac, char **av);
 
-void	set_bool(t_mtx *mtx, bool *set, bool val);
-bool	get_bool(t_mtx *mtx, bool *val);
-void	set_long(t_mtx *mtx, long *set, long val);
-long	get_long(t_mtx *mtx, long *val);
-bool	sim_fin(t_data *data);
 
-// static void	eat(t_philo *ph);
-void	*im_mr_lonely(void *data);
+/*  ========================  */
+/*		SIMULATION FUNCS	  */
+/*  ========================  */
 int		think(t_philo *ph, bool in_dinner);
-void	*dine_in(void *philo);
 int		start_sim(t_data *data);
+void	*im_mr_lonely(void *data);
+void	*dine_in(void *philo);
 
-void	clean_sim(t_data *data);
+/*  ========================  */
+/*		CLEANING FUNCS		  */
+/*  ========================  */
+int		clean_sim(t_data *data);
+
 #endif

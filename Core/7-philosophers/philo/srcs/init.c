@@ -62,9 +62,6 @@ static int	init_forks(t_data *data)
 
 int	init_data(t_data *data, int ac, char **av)
 {
-	int	i;
-
-	i = 0;
 	parse_input(data, ac, av);
 	if (data -> ph_num < 1 || (data -> ml_num < 1 && ac == 6)
 		|| data -> tod < 60 || data -> toe < 60 || data -> tos < 60)
@@ -85,6 +82,6 @@ int	init_data(t_data *data, int ac, char **av)
 	if (mutex_opers(&data -> prt_lk, INIT))
 		return (print_error_ret("print mutex failed to init", 1));
 	if (init_philos(data))
-		return ("philos failed to init", 1);
+		return (print_error_ret("philos failed to init", 1));
 	return (0);
 }

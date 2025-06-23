@@ -26,6 +26,7 @@ int	main(int ac, char **av)
 		return (print_error_ret("data init failed", 1));
 	if (start_sim(&data))
 		return (print_error_ret("simulation failed to start", 1));
-	clean_sim(&data);
+	if (clean_sim(&data))
+		return (print_error_ret("cleaning failed", 1));
 	return (0);
 }

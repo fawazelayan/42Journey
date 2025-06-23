@@ -25,7 +25,7 @@ int	print_action(t_philo *ph, t_ph_status st)
 	long	stamp;
 
 	stamp = get_time_in_ms() - ph -> table -> st;
-	if (ph -> full)
+	if (get_bool(&ph -> eat_lk, &ph -> full))
 		return (0);
 	if (mutex_opers(&ph -> table -> prt_lk, LOCK))
 		return (print_error_ret("print failed to lock", 1));

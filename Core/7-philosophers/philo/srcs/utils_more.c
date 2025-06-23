@@ -72,7 +72,7 @@ void	precise_usleep(t_data *data, long time)
 		return ;
 	while (get_time_in_ms() - start < time)
 	{
-		if (get_bool(&data -> dat_lk, &data -> ended))
+		if (sim_fin(data))
 			break ;
 		usleep(100);
 	}

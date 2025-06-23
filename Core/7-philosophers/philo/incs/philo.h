@@ -84,7 +84,7 @@ typedef struct s_philo
 struct s_data
 {
 	t_philo			*philos;	// philos array
-	t_thr			monitor;		// death monitor
+	t_thr			monitor;	// death monitor
 	t_fork			*forks;		// forks array
 	t_mtx			dat_lk;		// data lock to read and write
 	t_mtx			prt_lk;		// print locks to not overlap actions
@@ -101,7 +101,7 @@ struct s_data
 };
 
 /*  ========================  */
-/*		VALIDATION FUNCS	  */
+/*		 VALIDATION FUNC	  */
 /*  ========================  */
 bool	is_valid_prog(int ac, char **av);
 
@@ -109,6 +109,7 @@ bool	is_valid_prog(int ac, char **av);
 /*		  UTILS FUNCS		  */
 /*  ========================  */
 int		thr_ops(t_thr *thr, void *(*foo)(void *), void *data, t_code cd);
+int		unlock_on_err(t_philo *ph, char *err, int forks_num);
 int		print_action(t_philo *ph, t_ph_status st);
 int		print_error_ret(char *error, int ret);
 int		mutex_opers(t_mtx *mtx, t_code code);
@@ -131,10 +132,9 @@ long	get_time_in_ms(void);
 void	*monitoring(void *data);
 
 /*  ========================  */
-/*		  INIT FUNCS		  */
+/*		   INIT FUNC		  */
 /*  ========================  */
 int		init_data(t_data *data, int ac, char **av);
-
 
 /*  ========================  */
 /*		SIMULATION FUNCS	  */
@@ -145,8 +145,10 @@ void	*im_mr_lonely(void *data);
 void	*dine_in(void *philo);
 
 /*  ========================  */
-/*		CLEANING FUNCS		  */
+/*		 CLEANING FUNC		  */
 /*  ========================  */
 int		clean_sim(t_data *data);
+
+// There are other funcs but are static so not added here
 
 #endif

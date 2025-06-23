@@ -1,6 +1,6 @@
 #  ========================  #
 #							 #
-#  	   -*- SO_LONG -*-		 #
+#  	 -*- PHILOSOPHERS -*-	 #
 #							 #
 #  ========================  #
 
@@ -29,7 +29,9 @@ RM		=	rm -rf
 #  ========================  #
 #		FILES AND PATHS		 #
 #  ========================  #
-SRCS	=	$(shell find $(SRCS_DR) -name '*.c')	# Remove wild cards at campus
+SRCS	=	srcs/utils.c srcs/utils_more.c srcs/th_mtx_utils.c srcs/sim_utils.c srcs/set_get_utils.c \
+			srcs/simulation.c srcs/init.c srcs/clean.c \
+			srcs/main.c srcs/validation.c
 OBJS	=	$(patsubst $(SRCS_DR)/%.c,$(OBJS_DR)/%.o,$(SRCS))
 
 #  ========================  #

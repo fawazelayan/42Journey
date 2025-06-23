@@ -29,6 +29,7 @@ int	create_threads(t_data *dt)
 		{
 			if (thr_ops(&dt ->philos[i].thr, dine_in, &dt -> philos[i], CRT))
 				return (print_error_ret("philos threads failed to create", 1));
+			usleep(100);
 			i++;
 		}
 	}
@@ -48,4 +49,16 @@ int	join_threads(t_data *dt)
 			return (print_error_ret("philos threads failed to join", 1));
 	}
 	return (0);
+}
+
+int	unlock_on_err(t_philo *ph, char *err, int forks_num)
+{
+	if (forks_num == 2)
+	{
+		mutex_opers(&ph -> first -> mutex, UNLOCK);
+		mutex_opers(&ph -> scnd -> mutex, UNLOCK);
+	}
+	else if (forks_num == 1)
+		mutex_opers(&ph -> scnd -> mutex, UNLOCK);
+	return (print_error_ret(err, 1));
 }

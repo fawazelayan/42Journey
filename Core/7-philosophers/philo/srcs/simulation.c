@@ -17,22 +17,22 @@ static int	eat(t_philo *ph)
 	if (sim_fin(ph -> table))
 		return (0);
 	if (mutex_opers(&ph -> first -> mutex, LOCK))
-		return (print_error_ret("first fork failed to lock", 1));
+		return (unlock_on_err(ph, "first fork failed to lock", 2));
 	if (print_action(ph, TAKEN_FST))
-		return (print_error_ret("first fork print failed", 1));
+		return (unlock_on_err(ph, "first fork print failed", 2));
 	if (mutex_opers(&ph -> scnd -> mutex, LOCK))
-		return (print_error_ret("second fork failed to lock", 1));
+		return (unlock_on_err(ph, "second fork failed to lock", 2));
 	if (print_action(ph, TAKE_SEC))
-		return (print_error_ret("second fork print failed", 1));
+		return (unlock_on_err(ph, "second fork print failed", 2));
 	set_long(&ph -> eat_lk, &ph -> lmt, get_time_in_ms());
-	ph -> ml_cnt++;
+	increase_long(&ph -> eat_lk, &ph -> ml_cnt);
 	if (print_action(ph, EAT))
-		return (print_error_ret("eating print faiked", 1));
+		return (unlock_on_err(ph, "eating print failed", 2));
 	precise_usleep(ph -> table, ph -> table -> toe);
-	if (ph -> ml_cnt == ph -> table -> ml_num)
+	if (get_long(&ph -> eat_lk, &ph -> ml_cnt) == ph -> table -> ml_num)
 		set_bool(&ph -> eat_lk, &ph -> full, true);
 	if (mutex_opers(&ph -> first -> mutex, UNLOCK))
-		return (print_error_ret("first fork failed to unlock", 1));
+		return (unlock_on_err(ph, "first fork failed to unlock", 1));
 	if (mutex_opers(&ph -> scnd -> mutex, UNLOCK))
 		return (print_error_ret("second fork failed to unlock", 1));
 	return (0);
@@ -88,7 +88,7 @@ void	*dine_in(void *philo)
 	de_synchro(ph);
 	while (!sim_fin(ph -> table))
 	{
-		if (ph -> full)
+		if (get_bool(&ph -> eat_lk, &ph -> full))
 			break ;
 		if (eat(ph))
 			set_bool(&ph -> table -> dat_lk, &ph -> table -> ended, true);

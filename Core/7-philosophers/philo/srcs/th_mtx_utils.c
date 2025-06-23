@@ -27,7 +27,7 @@ static bool	is_dead(t_philo *ph)
 void	wait_threads(t_data *dt)
 {
 	while (!get_bool(&dt -> dat_lk, &dt -> wait))
-		;
+		usleep(42);
 }
 
 bool	threads_active(t_mtx *mtx, long *th, long ph_num)
@@ -50,7 +50,7 @@ void	*monitoring(void *data)
 	i = 0;
 	dt = (t_data *)data;
 	while (!threads_active(&dt -> dat_lk, &dt -> th_up, dt -> ph_num))
-		;
+		usleep(42);
 	while (!sim_fin(dt))
 	{
 		i = 0;

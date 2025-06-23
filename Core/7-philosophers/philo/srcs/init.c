@@ -33,7 +33,7 @@ static int	init_philos(t_data *data)
 	i = 0;
 	while (i < data -> ph_num)
 	{
-		data -> philos[i].id = i;
+		data -> philos[i].id = i + 1;
 		data -> philos[i].full = false;
 		data -> philos[i].ml_cnt = 0;
 		if (mutex_opers(&data -> philos[i].eat_lk, INIT))
@@ -64,7 +64,7 @@ int	init_data(t_data *data, int ac, char **av)
 {
 	parse_input(data, ac, av);
 	if (data -> ph_num < 1 || (data -> ml_num < 1 && ac == 6)
-		|| data -> tod < 60 || data -> toe < 60 || data -> tos < 60)
+		|| data -> tod < 1 || data -> toe < 1 || data -> tos < 1)
 		return (print_error_ret("invalid values while parsing", 1));
 	data -> philos = malloc(sizeof(t_philo) * data -> ph_num);
 	if (!data -> philos)

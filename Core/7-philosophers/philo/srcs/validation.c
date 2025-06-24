@@ -14,9 +14,7 @@
 
 static bool	is_empty(char *str)
 {
-	if (!str || !str_len(str))
-		return (true);
-	return (false);
+	return (!str || !str_len(str));
 }
 
 static bool	is_num(char *str)
@@ -56,8 +54,8 @@ static bool	invalid_args(char **args)
 bool	is_valid_prog(int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
-		return (print_error_ret("invalid number of arguments", 0));
+		return (print_err_ret("invalid number of arguments", 0));
 	else if (invalid_args(av))
-		return (print_error_ret("argument must be a positive number.", 0));
+		return (print_err_ret("argument must be a positive number.", 0));
 	return (true);
 }

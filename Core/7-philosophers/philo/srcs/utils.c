@@ -12,11 +12,11 @@
 
 #include "philo.h"
 
-int	print_error_ret(char *error, int ret)
+int	print_err_ret(char *error, int ret)
 {
-	write(2, "\nError: ", 8);
+	write(2, RED"\nError: ", 15);
 	write(2, error, str_len(error));
-	write(2, ".\n\n", 3);
+	write(2, ".\n\n"RST, 7);
 	return (ret);
 }
 
@@ -28,7 +28,7 @@ int	print_action(t_philo *ph, t_ph_status st)
 	if (get_bool(&ph -> eat_lk, &ph -> full))
 		return (0);
 	if (mutex_opers(&ph -> table -> prt_lk, LOCK))
-		return (print_error_ret("print failed to lock", 1));
+		return (print_err_ret("print failed to lock", 1));
 	if ((st == TAKEN_FST || st == TAKE_SEC) && !sim_fin(ph -> table))
 		printf(YLW"%ld\tPhilo %d has taken a fork\n"RST, stamp, ph -> id);
 	else if (st == EAT && !sim_fin(ph -> table))
@@ -40,7 +40,7 @@ int	print_action(t_philo *ph, t_ph_status st)
 	else if (st == DEAD && sim_fin(ph -> table))
 		printf(RED"%ld\tPhilo %d has died\n"RST, stamp, ph -> id);
 	if (mutex_opers(&ph -> table -> prt_lk, UNLOCK))
-		return (print_error_ret("print failed to unlock", 1));
+		return (print_err_ret("print failed to unlock", 1));
 	return (0);
 }
 
@@ -49,6 +49,8 @@ int	str_len(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);

@@ -42,6 +42,13 @@ typedef struct s_data	t_data;
 typedef pthread_mutex_t	t_mtx;
 typedef pthread_t		t_thr;
 
+typedef enum e_fork_state
+{
+	FIRST,
+	SECOND,
+	BOTH
+}	t_fork_state;
+
 typedef enum e_ph_status
 {
 	TAKEN_FST,
@@ -58,8 +65,9 @@ typedef enum e_code
 	UNLOCK,
 	LOCK,
 	INIT,
-	CRT,
-	JOIN
+	DETACH,
+	JOIN,
+	CRT
 }	t_code;
 
 typedef struct s_fork
@@ -73,7 +81,7 @@ typedef struct s_philo
 	t_data		*table;	// each philo gets access to data (global data)
 	t_fork		*first;	// right fork
 	t_mtx		eat_lk;	// lock to read and write lmt
-	t_fork		*scnd;	// left fork
+	t_fork		*second;	// left fork
 	t_thr		thr;	// thread for each philo
 	bool		full;	// full flag
 	long		ml_cnt;	// meal counter
@@ -95,10 +103,11 @@ struct s_data
 	long			toe;		// time_to_eat
 	long			tos;		// time_to_sleep
 	long			st;			// start_time
-	long			et;			// end_time
 	bool			ended;		// death or all philos are full
 	bool			wait;
 };
+
+// There are other funcs but are static so not added here
 
 /*  ========================  */
 /*		 VALIDATION FUNC	  */
@@ -109,9 +118,9 @@ bool	is_valid_prog(int ac, char **av);
 /*		  UTILS FUNCS		  */
 /*  ========================  */
 int		thr_ops(t_thr *thr, void *(*foo)(void *), void *data, t_code cd);
-int		unlock_on_err(t_philo *ph, char *err, int forks_num);
+int		unlock_on_err(t_philo *ph, char *err, t_fork_state st);
 int		print_action(t_philo *ph, t_ph_status st);
-int		print_error_ret(char *error, int ret);
+int		print_err_ret(char *error, int ret);
 int		mutex_opers(t_mtx *mtx, t_code code);
 int		create_threads(t_data *dt);
 int		join_threads(t_data *dt);
@@ -147,8 +156,8 @@ void	*dine_in(void *philo);
 /*  ========================  */
 /*		 CLEANING FUNC		  */
 /*  ========================  */
-int		clean_sim(t_data *data);
-
-// There are other funcs but are static so not added here
+int		detach_on_fail(t_data *data, int count);
+int		clean_mutex(t_data *data);
+void	clean_memory(t_data *data);
 
 #endif

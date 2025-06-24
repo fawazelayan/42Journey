@@ -24,12 +24,6 @@ static bool	is_dead(t_philo *ph)
 	return (false);
 }
 
-void	wait_threads(t_data *dt)
-{
-	while (!get_bool(&dt -> dat_lk, &dt -> wait))
-		usleep(42);
-}
-
 bool	threads_active(t_mtx *mtx, long *th, long ph_num)
 {
 	bool	ret;
@@ -65,18 +59,4 @@ void	*monitoring(void *data)
 		}
 	}
 	return (NULL);
-}
-
-void	de_synchro(t_philo *ph)
-{
-	if (ph -> table -> ph_num % 2 == 0)
-	{
-		if (ph -> id % 2 == 0)
-			precise_usleep(ph -> table, 10);
-	}
-	else
-	{
-		if (ph -> id % 2)
-			think(ph, false);
-	}
 }

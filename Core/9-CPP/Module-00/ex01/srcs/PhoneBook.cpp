@@ -10,27 +10,27 @@ int	PhoneBook::addContact(void)
 	std::cout << std::endl;
 	info = addValidInfo("Enter first name: ");
 	if (info == "EXIT")
-		return (1);
+		return 1;
 	contacts[next].setFirstName(info);
 
 	info = addValidInfo("Enter last name: ");
 	if (info == "EXIT")
-		return (1);
+		return 1;
 	contacts[next].setLastName(info);
 
 	info = addValidInfo("Enter nickname: ");
 	if (info == "EXIT")
-		return (1);
+		return 1;
 	contacts[next].setNickname(info);
 
 	info = addValidInfo("Enter phone number: ");
 	if (info == "EXIT")
-		return (1);
+		return 1;
 	contacts[next].setPhoneNumber(info);
 
 	info = addValidInfo("Enter darkest secret: ");
 	if (info == "EXIT")
-		return (1);
+		return 1;
 	contacts[next].setDarkestSecret(info);
 
 	std::cout << GRN << "\nContact number: "
@@ -40,7 +40,7 @@ int	PhoneBook::addContact(void)
 	next = (next + 1) % 8;
 	if (count < 8)
 		count++;
-	return (0);
+	return 0;
 }
 
 int	PhoneBook::searchContact(void) const
@@ -48,10 +48,11 @@ int	PhoneBook::searchContact(void) const
 	int index = -1;
 	std::string input;
 
-	if (count == 0)
+	if (!count)
 	{
-		std::cout << RED <<"\nPhone book is empty, nothing to display.\n" << RST;
-		return (0);
+		std::cout << RED <<"\nPhone book is empty, nothing to display.\n"
+			<< RST;
+		return 0;
 	}
 
 	for (int i = 0; i < count; i++)
@@ -62,10 +63,10 @@ int	PhoneBook::searchContact(void) const
 	}
 
 	if (searchValidIndex(index, count))
-		return (1);
+		return 1;
 
 	displayInfo(contacts[index].getFirstName(), contacts[index].getLastName(),
 				contacts[index].getNickname(), contacts[index].getPhoneNumber(),
 				contacts[index].getDarkestSecret());
-	return (0);
+	return 0;
 }

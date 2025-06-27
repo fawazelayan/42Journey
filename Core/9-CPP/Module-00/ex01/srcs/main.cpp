@@ -4,11 +4,11 @@
 int	main(void)
 {
 	std::string	cmd;
-	PhoneBook	book;
+	PhoneBook	phoneBook;
 
 	std::cout << YLW
-			<< "\nPlease enter one of these commands: ADD, SEARCH, EXIT\n"
-			<< RST;
+		<< "\nPlease enter one of these commands: ADD, SEARCH, EXIT\n"
+		<< RST;
 
 	std::getline(std::cin, cmd);
 
@@ -16,13 +16,13 @@ int	main(void)
 	{
 		if (cmd == "ADD")
 		{
-			if (book.addContact())
-				break ;
+			if (phoneBook.addContact())
+				break;
 		}
 		else if (cmd == "SEARCH")
 		{
-			if (book.searchContact())
-				break ;
+			if (phoneBook.searchContact())
+				break;
 		}
 		std::cout << YLW
 			<< "\nPlease enter one of these commands: ADD, SEARCH, EXIT\n"
@@ -30,5 +30,5 @@ int	main(void)
 		std::getline(std::cin, cmd);
 	}
 	std::cout << GRN << "\nThanks for using PhoneBook!\n\n" << RST;
-	return (0);
+	return 0;
 }

@@ -29,8 +29,8 @@ std::string	addValidInfo(std::string prompt)
 std::string	truncate(const std::string& str)
 {
 	if (str.length() > 10)
-		return (str.substr(0, 9) + ".");
-	return (str);
+		return str.substr(0, 9) + ".";
+	return str;
 }
 
 void	drawTable(const int index,

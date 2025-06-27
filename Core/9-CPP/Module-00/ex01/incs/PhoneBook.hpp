@@ -7,9 +7,15 @@ class PhoneBook
 {
 	private:
 		Contact contacts[8];
-	public: //TODO
-		addContact
-		searchContact
+		int	count;
+		int	next;
+	public:
+		// Constructor
+		PhoneBook();
+		
+		// Command functions
+		int searchContact(void) const;
+		int addContact(void);
 };
 
 #endif

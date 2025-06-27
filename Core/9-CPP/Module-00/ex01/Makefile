@@ -28,14 +28,15 @@ RM		=	rm -rf
 #  ========================  #
 #		FILES AND PATHS		 #
 #  ========================  #
-SRCS	=	srcs/PhoneBook.cpp
-OBJS	=	$(patsubst $(SRCS_DR)/%.c,$(OBJS_DR)/%.o,$(SRCS))
+SRCS	=	srcs/Contact.cpp srcs/PhoneBook.cpp srcs/Utils.cpp \
+			srcs/main.cpp
+OBJS	=	$(patsubst $(SRCS_DR)/%.cpp,$(OBJS_DR)/%.o,$(SRCS))
 
 #  ========================  #
 #	   COMPILATION RULES	 #
 #  ========================  #
 CPP			=	c++
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
+CPPFLAGS	=	-Wall -Wextra -Werror -I$(INC_DR) -std=c++98
 
 #  ========================  #
 #			RULES			 #
@@ -56,7 +57,7 @@ $(OBJS_DR)/%.o	:	$(SRCS_DR)/%.cpp
 #  ========================  #
 $(NAME)		:	$(OBJS)
 	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
-		echo "$(PURPLE)\n🔗 Creating megaphone executable...\n$(RESET)"; \
+		echo "$(PURPLE)\n🔗 Creating phonebook executable...\n$(RESET)"; \
 	else \
 		echo "$(GREEN)\n🔄 Rebuilding everything...$(RESET)\n"; \
 	fi

@@ -9,23 +9,21 @@
 /*   Updated: 2024/07/19 14:02:17 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <unistd.h>
 
 void	ft_print_alphabet(void)
 {
-	char	alp;
+	char	letter;
 
-	alp = 'a';
-	while (alp <= 'z')
+	letter = 'a';
+	while (letter <= 'z')
 	{
-		write(1, &alp, 1);
-		alp++;
+		write(1, &letter, 1);
+		letter++;
 	}
 }
-/*
-int	main(void)
-{
-	ft_print_alphabet();
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// int	main(void)
+// {
+// 	ft_print_alphabet();
+// }

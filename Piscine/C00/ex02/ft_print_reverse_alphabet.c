@@ -9,23 +9,21 @@
 /*   Updated: 2024/07/19 14:04:52 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <unistd.h>
 
 void	ft_print_reverse_alphabet(void)
 {
-	char	alp;
+	char	letter;
 
-	alp = 'z';
-	while (alp >= 'a')
+	letter = 'z';
+	while (letter >= 'a')
 	{
-		write(1, &alp, 1);
-		alp--;
+		write(1, &letter, 1);
+		letter--;
 	}
 }
-/*
-int	main(void)
-{
-	ft_print_reverse_alphabet();
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// int	main(void)
+// {
+// 	ft_print_reverse_alphabet();
+// }

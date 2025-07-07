@@ -9,7 +9,6 @@
 /*   Updated: 2024/07/20 05:05:45 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <unistd.h>
 
 void	ft_print_comb(void)
@@ -35,10 +34,8 @@ void	ft_print_comb(void)
 		dig[0]++;
 	}
 }
-/*
-int	main(void)
-{
-	ft_print_comb();
-	return (0);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// int	main(void)
+// {
+// 	ft_print_comb();
+// }

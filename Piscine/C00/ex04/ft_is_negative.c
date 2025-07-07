@@ -18,9 +18,8 @@ void	ft_is_negative(int n)
 	else
 		write(1, "P", 1);
 }
-/*
-int	main(void)
-{
-	ft_is_negative(-42);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// int	main(void)
+// {
+// 	ft_is_negative(-42);
+// }

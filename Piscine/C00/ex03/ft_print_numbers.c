@@ -9,23 +9,21 @@
 /*   Updated: 2024/07/19 14:10:20 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <unistd.h>
 
 void	ft_print_numbers(void)
 {
-	char	x;
+	char	num;
 
-	x = '0';
-	while (x <= '9')
+	num = '0';
+	while (num <= '9')
 	{
-		write(1, &x, 1);
-		x++;
+		write(1, &num, 1);
+		num++;
 	}
 }
-/*
-int	main(void)
-{
-	ft_print_numbers();
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// int	main(void)
+// {
+// 	ft_print_numbers();
+// }

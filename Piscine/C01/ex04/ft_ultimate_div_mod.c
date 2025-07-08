@@ -9,14 +9,13 @@
 /*   Updated: 2024/07/22 07:49:35 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-
 void	ft_ultimate_div_mod(int *a, int *b)
 {
 	int	div;
 	int	mod;
 
+	div = 0;
+	mod = 0;
 	if (*b != 0)
 	{
 		div = *a / *b;
@@ -25,15 +24,15 @@ void	ft_ultimate_div_mod(int *a, int *b)
 		*b = mod;
 	}
 }
-
-/*int	main(void)
-{
-	int	a = 5;
-	int	b = 6;
-	int	*p1 = &a;
-	int	*p2 = &b;
-	ft_ultimate_div_mod(p1, p2);
-	printf("%i", a);
-	printf("%i", b);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	a = 5;
+// 	int	b = 6;
+// 	int tmp = a;
+// 	int tmp2 = b;
+// 	ft_ultimate_div_mod(&a, &b);
+// 	printf("Mod of %d %% %d is %d\nDiv of %d / %d is %d\n",
+// 		tmp, tmp2, b, tmp, tmp2, a);
+// }

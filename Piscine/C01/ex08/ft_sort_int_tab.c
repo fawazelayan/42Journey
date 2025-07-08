@@ -9,40 +9,51 @@
 /*   Updated: 2024/07/22 08:40:55 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+void	ft_swap(int *a, int *b)
+{
+	int	tmp;
 
-//#include <stdio.h>
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
 
 void	ft_sort_int_tab(int *tab, int size)
 {
 	int	i;
-	int	sort;
+	int	swapped;
 
-	while (size >= 0)
+	while (size > 0)
 	{
 		i = 0;
-		while (i < size - 1)
+		swapped = 0;
+		while (i < (size - 1))
 		{
-			if (tab[i] >= tab[i + 1])
+			if (tab[i] > tab[i + 1])
 			{
-				sort = tab[i];
-				tab[i] = tab[i + 1];
-				tab[i + 1] = sort;
+				ft_swap(&tab[i], &tab[i + 1]);
+				swapped = 1;
 			}
 			i++;
 		}
 		size--;
+		if (!swapped)
+			break ;
 	}
 }
-/*
-int	main(void)
-{
-	int	arr[5] = {25, 100, 4, 4, 4};
-	int	i = 0;
-	ft_sort_int_tab(arr, 5);
-	while (i < 5)
-	{
-		printf(" %i", arr[i]);
-		i++;
-	}
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	arr[6] = {100, 25, 15, 30, 1, 99};
+// 	int	i = 0;
+// 	printf("Array before soring: ");
+// 	while (i < 6)
+// 		printf("%d ", arr[i++]);
+// 	ft_sort_int_tab(arr, 6);
+// 	i = 0;
+// 	printf("\nArray after sorting: ");
+// 	while (i < 6)
+// 		printf("%d ", arr[i++]);
+// 	printf("\n");
+// }

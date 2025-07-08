@@ -9,9 +9,6 @@
 /*   Updated: 2024/07/22 07:48:44 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-
 void	ft_div_mod(int a, int b, int *div, int *mod)
 {
 	if (b != 0)
@@ -20,17 +17,15 @@ void	ft_div_mod(int a, int b, int *div, int *mod)
 		*mod = a % b;
 	}
 }
-/*
-int	main(void)
-{
-	int	n = 5;
-	int	m = 6;
-	int	*p1;
-	int	*p2;
-	p1=&n;
-	p2=&m;
-	ft_div_mod(n, m, p1, p2);
-	printf("%i", n);
-	printf("%i", m);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	num1 = 5;
+// 	int	num2 = 6;
+// 	int div;
+// 	int mod;
+// 	ft_div_mod(num1, num2, &div, &mod);
+// 	printf("Mod of %d %% %d is %d\nDiv of %d / %d is %d\n",
+// 		num1, num2, mod, num1, num2, div);
+// }

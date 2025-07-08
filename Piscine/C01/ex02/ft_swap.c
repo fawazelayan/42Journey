@@ -9,28 +9,21 @@
 /*   Updated: 2024/07/22 07:51:40 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-
 void	ft_swap(int *a, int *b)
 {
-	int	temp;
+	int	tmp;
 
-	temp = *a;
+	tmp = *a;
 	*a = *b;
-	*b = temp;
+	*b = tmp;
 }
-/*
-int	main(void)
-{
-	int	n = 2;
-	int	e = 5;
-	int	*p1;
-	int	*p2;
-	p1 = &n;
-        p2 = &e;
-	ft_swap(p1, p2);
-	printf("%i", n);
-	printf("%i", e);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	x = 2;
+// 	int	y = 5;
+// 	printf("Before swapping:\n\tX was %d\n\tY was %d\n\n", x, y);
+// 	ft_swap(&x, &y);
+// 	printf("After swapping:\n\tX is now %d\n\tY is now %d\n\n", x, y);
+// }

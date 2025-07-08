@@ -9,21 +9,15 @@
 /*   Updated: 2024/07/22 07:51:15 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-
 void	ft_ft(int *nbr)
 {
 	*nbr = 42;
 }
-/*
-int	main(void)
-{
-	int	*nbr;
-	int	num;
-
-	nbr = &num;
-	ft_ft(nbr);
-	printf("%i", num);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	num = 1;
+// 	ft_ft(&num);
+// 	printf("%d", num);
+// }

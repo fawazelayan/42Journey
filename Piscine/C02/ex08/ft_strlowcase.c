@@ -9,9 +9,6 @@
 /*   Updated: 2024/07/23 13:25:43 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-
 char	*ft_strlowcase(char *str)
 {
 	int	i;
@@ -25,12 +22,12 @@ char	*ft_strlowcase(char *str)
 	}
 	return (str);
 }
-/*
-int	main(void)
-{
-	char	str[] = "HeElLO124@";
-
-	ft_strlowcase(str);
-	printf("%s", str);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	str[10] = "HeeLL123@";
+// 	printf("String before lowcasing: %s\n", str);
+// 	ft_strlowcase(str);
+// 	printf("String after lowcasing: %s\n", str);
+// }

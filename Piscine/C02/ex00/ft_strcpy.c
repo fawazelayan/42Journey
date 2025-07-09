@@ -9,9 +9,6 @@
 /*   Updated: 2024/07/28 13:01:12 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-
 char	*ft_strcpy(char *dest, char *src)
 {
 	int	i;
@@ -25,11 +22,12 @@ char	*ft_strcpy(char *dest, char *src)
 	dest[i] = '\0';
 	return (dest);
 }
-/*
-int	main(void)
-{
-	char	str[] = "123";
-	ft_strcpy(str, "Hello");
-	printf("%s", str);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	str[6] = "123";
+// 	printf("String before copying: %s\n", str);
+// 	ft_strcpy(str, "Hello");
+// 	printf("String after copying: %s\n", str);
+// }

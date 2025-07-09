@@ -9,31 +9,26 @@
 /*   Updated: 2024/07/28 13:19:35 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-
 int	ft_str_is_numeric(char *str)
 {
 	int	i;
-	int	last;
 
-	last = 1;
 	i = 0;
 	while (str[i] != '\0')
 	{
-		last = 0;
-		if (str[i] >= '0' && str[i] <= '9')
-			last = 1;
-		else
-			break ;
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			return (0);
 		i++;
 	}
-	return (last);
+	return (1);
 }
-/*
-int	main(void)
-{
-	int	i = ft_str_is_numeric("1231231241234@");
-	printf("%i", i);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	is_numeric = ft_str_is_numeric("123");
+// 	if (is_numeric)
+// 		printf("String contains only numbers.\n");
+// 	else
+// 		printf("String contains other characters.\n");
+// }

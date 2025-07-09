@@ -9,32 +9,27 @@
 /*   Updated: 2024/07/28 13:16:26 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-
 int	ft_str_is_alpha(char *str)
 {
 	int	i;
-	int	last;
 
-	last = 1;
 	i = 0;
 	while (str[i] != '\0')
 	{
-		last = 0;
-		if ((str[i] >= 'A' && str[i] <= 'Z')
-			|| (str[i] >= 'a' && str[i] <= 'z'))
-			last = 1;
-		else
-			break ;
+		if (!((str[i] >= 'A' && str[i] <= 'Z')
+				|| (str[i] >= 'a' && str[i] <= 'z')))
+			return (0);
 		i++;
 	}
-	return (last);
+	return (1);
 }
-/*
-int	main(void)
-{
-	int	i = ft_str_is_alpha("");
-	printf("%i", i);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	is_alpha = ft_str_is_alpha("abcABC");
+// 	if (is_alpha)
+// 		printf("String contains only alphabets.\n");
+// 	else
+// 		printf("String contains other characters.\n");
+// }

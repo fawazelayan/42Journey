@@ -9,40 +9,47 @@
 /*   Updated: 2024/07/28 15:32:16 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+void	ft_charupcase(char *str)
+{
+	if (*str >= 'a' && *str <= 'z')
+		*str -= 32;
+}
 
-//#include <stdio.h>
+void	ft_charlowcase(char *str)
+{
+	if (*str >= 'A' && *str <= 'Z')
+		*str += 32;
+}
 
 char	*ft_strcapitalize(char *str)
 {
 	int	i;
 
-	if (str[0] >= 'a' && str[0] <= 'z')
-		str[0] -= 32;
 	i = 0;
+	ft_charupcase(&str[0]);
 	while (str[i] != '\0')
 	{
-		if ((str[i] < '0' || str[i] > '9') && (str[i] < 'A' || str[i] > 'Z')
-			&& (str[i] < 'a' || str[i] > 'z'))
+		if (!(str[i] >= 'A' && str[i] <= 'Z')
+			&& !(str[i] >= 'a' && str[i] <= 'z')
+			&& !(str[i] >= '0' && str[i] <= '9'))
 		{
 			i++;
-			if (str[i] >= 'a' && str[i] <= 'z')
-				str[i] -= 32;
+			ft_charupcase(&str[i]);
 		}
 		else
 		{
 			i++;
-			if (str[i] >= 'A' && str[i] <= 'Z')
-				str[i] += 32;
+			ft_charlowcase(&str[i]);
 		}
 	}
 	return (str);
 }
-/*
-int	main(void)
-{
-	char str[] = "";
-	char str[] = "salut, comment tu vas ? 42mots quarante-deux; cinquante+et+un";
-	ft_strcapitalize(str);
-	printf("%s", str);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	str[] = "salut, comment tu vas ? 42mots quarane-deux; cinqua+et+u";
+// 	printf("String before capitalizing words: %s\n", str);
+// 	ft_strcapitalize(str);
+// 	printf("String after capitalizing words: %s\n", str);
+// }

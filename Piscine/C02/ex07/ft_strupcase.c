@@ -9,9 +9,6 @@
 /*   Updated: 2024/07/23 13:23:12 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-
 char	*ft_strupcase(char *str)
 {
 	int	i;
@@ -25,12 +22,12 @@ char	*ft_strupcase(char *str)
 	}
 	return (str);
 }
-/*
-int	main(void)
-{
-	char	str[] = "HeelLO124@";
-
-	ft_strupcase(str);
-	printf("%s", str);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	str[10] = "Heell123@";
+// 	printf("String before upcasing: %s\n", str);
+// 	ft_strupcase(str);
+// 	printf("String after upcasing: %s\n", str);
+// }

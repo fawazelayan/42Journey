@@ -9,9 +9,6 @@
 /*   Updated: 2024/07/28 13:12:53 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
 	unsigned int	i;
@@ -23,17 +20,15 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 		i++;
 	}
 	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
+		dest[i++] = '\0';
 	return (dest);
 }
-/*
-int	main(void)
-{
-	char dest[10];
-	ft_strncpy(dest, "Hello", 3);
-	printf("%s", dest);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	str[4] = "123";
+// 	printf("String before copying: %s\n", str);
+// 	ft_strncpy(str, "Hello", 3);
+// 	printf("String after copying: %s\n", str);
+// }

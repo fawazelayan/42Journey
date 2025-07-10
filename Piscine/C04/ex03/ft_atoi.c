@@ -9,47 +9,48 @@
 /*   Updated: 2024/07/30 21:35:10 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-void	whitesp(char **str)
+void	whitespace_check(char *str, int *index)
 {
-	while ((**str >= 9 && **str <= 13) || **str == 32)
-		(*str)++;
+	while (str[*index] == 32 || (str[*index] >= 9 && str[*index] <= 13))
+		(*index)++;
 }
 
-int	sign(char **str)
+void	sign_check(char *str, int *sign, int *index)
 {
-	int	sig;
-
-	sig = 1;
-	whitesp(str);
-	while (**str == '+' || **str == '-')
+	while (str[*index] == '-' || str[*index] == '+')
 	{
-		if (**str == '-')
-			sig *= -1;
-		(*str)++;
+		if (str[*index] == '-')
+			*sign *= -1;
+		(*index)++;
 	}
-	return (sig);
+}
+
+void	convert_char_to_int(char *str, int *num, int *index)
+{
+	while (str[*index] >= '0' && str[*index] <= '9')
+	{
+		*num = *num * 10 + (str[*index] - '0');
+		(*index)++;
+	}
 }
 
 int	ft_atoi(char *str)
 {
-	int	sig;
-	int	res;
+	int	i;
+	int	num;
+	int	sign;
 
-	res = 0;
-	sig = sign(&str);
-	while (*str >= 48 && *str <= 57)
-	{
-		res *= 10;
-		res += *str - 48;
-		str++;
-	}
-	res *= sig;
-	return (res);
+	i = 0;
+	num = 0;
+	sign = 1;
+	whitespace_check(str, &i);
+	sign_check(str, &sign, &i);
+	convert_char_to_int(str, &num, &i);
+	return (num * sign);
 }
-/*#include <stdio.h>
-int	main(void)
-{
-	printf("%d", ft_atoi("  	---++--1234as54"));
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	printf("The num converted from the string is: %d\n", ft_atoi(" -+-123a"));
+// }

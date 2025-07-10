@@ -9,23 +9,18 @@
 /*   Updated: 2024/07/29 14:26:24 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//#include <stdio.h>
-
 int	ft_strlen(char *str)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
+	len = 0;
+	while (str[len] != '\0')
+		len++;
+	return (len);
 }
-/*
-int	main(void)
-{
-	char str[]= "HEllo";
-	int i = ft_strlen(str);
-	printf("%i", i);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	printf("%d", ft_strlen("Hello\n"));
+// }

@@ -9,16 +9,23 @@
 /*   Updated: 2024/07/29 16:05:55 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+int	ft_strlen(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str[len] != '\0')
+		len++;
+	return (len);
+}
 
 char	*ft_strcat(char *dest, char *src)
 {
 	int	len;
 	int	i;
 
-	len = 0;
 	i = 0;
-	while (dest[len] != '\0')
-		len++;
+	len = ft_strlen(dest);
 	while (src[i] != '\0')
 	{
 		dest[len + i] = src[i];
@@ -27,11 +34,12 @@ char	*ft_strcat(char *dest, char *src)
 	dest[len + i] = '\0';
 	return (dest);
 }
-/*#include<stdio.h>
-int	main(void)
-{
-	char dest[13] = "Hello, ";
-	char src[] = "World!";
-	printf("%s", ft_strcat(dest, src));
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include<stdio.h>
+// int	main(void)
+// {
+// 	char *src = "World!";
+// 	char dest[14] = "Hello, ";
+// 	printf("Dest before cat: %s\n", dest);
+// 	printf("Dest after cat: %s\n", ft_strcat(dest, src));
+// }

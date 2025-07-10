@@ -9,54 +9,43 @@
 /*   Updated: 2024/07/29 16:20:10 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-int	len1(char *dest)
+int	ft_strlen(char *str)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	while (dest[i] != '\0')
-		i++;
-	return (i);
-}
-
-int	len2(char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-		i++;
-	return (i);
+	len = 0;
+	while (str[len] != '\0')
+		len++;
+	return (len);
 }
 
 unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {
 	unsigned int	i;
-	unsigned int	lendest;
-	unsigned int	lensrc;
+	unsigned int	dest_len;
+	unsigned int	src_len;
 
 	i = 0;
-	lendest = len1(dest);
-	lensrc = len2(src);
-	if (size <= lendest || size == 0)
-		return (size + lensrc);
-	while (src[i] != '\0' && i < size - lendest - 1)
+	dest_len = ft_strlen(dest);
+	src_len = ft_strlen(src);
+	if (size <= dest_len || size == 0)
+		return (size + src_len);
+	while (src[i] != '\0' && i < (size - dest_len - 1))
 	{
-		dest[lendest + i] = src[i];
+		dest[dest_len + i] = src[i];
 		i++;
 	}
-	dest[lendest + i] = '\0';
-	return (lensrc + lendest);
+	dest[dest_len + i] = '\0';
+	return (src_len + dest_len);
 }
-/*#include<stdio.h>
-int	main(void)
-{
-	char src[] = "World!";
-	char dest[20] = "Hello, ";
-	unsigned int i = ft_strlcat(dest,src, 6);
-	printf("%d", i);
-	printf("\n%s", dest);
-	printf("\n%d", len2(src));
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include<stdio.h>
+// int	main(void)
+// {
+// 	char src[] = "World!";
+// 	char dest[20] = "Hello, ";
+// 	printf("Dest before cat: %s\n", dest);
+// 	unsigned int total_cat_len = ft_strlcat(dest, src, 9);
+// 	printf("Length of cat: %d\n", total_cat_len);
+// 	printf("Dest after cat: %s\n", dest);
+// }

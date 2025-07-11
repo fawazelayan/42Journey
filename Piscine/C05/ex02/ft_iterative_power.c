@@ -9,25 +9,22 @@
 /*   Updated: 2024/07/31 00:21:33 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 int	ft_iterative_power(int nb, int power)
 {
-	int	nbp;
+	int	powered_num;
 
-	nbp = nb;
-	if (power == 0 || (power == 0 && nb == 0) || nb == 1)
-		return (1);
-	if (power == 1)
-		return (nb);
+	powered_num = nb;
 	if (power < 0)
 		return (0);
+	if (power == 0 || nb == 1)
+		return (1);
 	while (power-- != 1)
-		nbp *= nb;
-	return (nbp);
+		powered_num *= nb;
+	return (powered_num);
 }
-/*#include<stdio.h>
-int	main(void)
-{
-	printf("%d", ft_iterative_power(2, 30));
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include<stdio.h>
+// int	main(void)
+// {
+// 	printf("%d", ft_iterative_power(2, 4));
+// }

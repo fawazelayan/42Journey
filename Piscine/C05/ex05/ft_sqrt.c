@@ -9,25 +9,21 @@
 /*   Updated: 2024/07/31 16:14:59 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 int	ft_sqrt(int nb)
 {
-	int	i;
+	int	sqrt;
 
-	i = 1;
-	while (i <= nb)
-	{
-		if (i * i == nb)
-			break ;
-		i++;
-	}
-	if (i * i == nb)
-		return (i);
+	sqrt = 1;
+	while (sqrt * sqrt < nb)
+		sqrt++;
+	if (sqrt * sqrt == nb)
+		return (sqrt);
 	return (0);
 }
-/*#include <stdio.h>
-int	main()
-{
-	printf("%d", ft_sqrt(121));
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main()
+// {
+// 	int	num = 121;
+// 	printf("The square root of %d is %d\n", num, ft_sqrt(num));
+// }

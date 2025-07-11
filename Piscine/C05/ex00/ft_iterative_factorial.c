@@ -9,33 +9,28 @@
 /*   Updated: 2024/07/31 00:00:45 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 int	ft_iterative_factorial(int nb)
 {
 	int	i;
 	int	fact;
 
-	fact = nb;
 	i = 1;
+	fact = 1;
 	if (nb < 0)
 		return (0);
-	if (nb == 0)
+	if (nb == 0 || nb == 1)
 		return (1);
-	while (i < nb)
-	{
-		fact *= i;
-		i++;
-	}
+	while (i <= nb)
+		fact *= i++;
 	return (fact);
 }
-/*#include <stdio.h>
-int	main(void)
-{
-	printf("Fact of 5:%d", ft_iterative_factorial(5));
-	printf("\nFact of 0:%d", ft_iterative_factorial(0));
-	printf("\nFact of 1:%d", ft_iterative_factorial(1));
-	printf("\nFact of -1:INVALID: %d", ft_iterative_factorial(-1));
-	printf("\nFact of 10:%d", ft_iterative_factorial(10));
-	printf("\n");
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	printf("Fact of 5: %d\n", ft_iterative_factorial(5));
+// 	printf("Fact of 0: %d\n", ft_iterative_factorial(0));
+// 	printf("Fact of 1: %d\n", ft_iterative_factorial(1));
+// 	printf("Fact of -1: %d Invalid\n", ft_iterative_factorial(-1));
+// 	printf("Fact of 10: %d\n", ft_iterative_factorial(10));
+// }

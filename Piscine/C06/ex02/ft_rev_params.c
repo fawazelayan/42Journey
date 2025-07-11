@@ -9,30 +9,32 @@
 /*   Updated: 2024/07/31 19:46:48 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <unistd.h>
 
-void	ft_putchar(char c)
+int	ft_strlen(char *str)
 {
-	write(1, &c, 1);
+	int	len;
+
+	len = 0;
+	while (str[len] != '\0')
+		len++;
+	return (len);
 }
 
-int	main(int argc, char **argv)
+void	ft_putstr(char *str)
+{
+	write(1, str, ft_strlen(str));
+}
+
+int	main(int ac, char **av)
 {
 	int	i;
-	int	j;
 
-	i = argc - 1;
+	i = ac - 1;
 	while (i > 0)
 	{
-		j = 0;
-		while (argv[i][j] != '\0')
-		{
-			ft_putchar(argv[i][j]);
-			j++;
-		}
-		i--;
-		ft_putchar('\n');
+		ft_putstr(av[i--]);
+		write(1, "\n", 1);
 	}
 	return (0);
 }

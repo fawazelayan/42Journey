@@ -9,36 +9,34 @@
 /*   Updated: 2024/07/31 20:45:24 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <unistd.h>
 
-void	ft_putstr(char *s)
+int	ft_strlen(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str[len] != '\0')
+		len++;
+	return (len);
+}
+
+void	ft_putstr(char *str)
+{
+	write(1, str, ft_strlen(str));
+}
+
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
 		i++;
-	write(1, s, i);
+	return (s1[i] - s2[i]);
 }
 
-int	cmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] != '\0' || s2[i] != '\0')
-	{
-		if (s1[i] > s2[i])
-			return (s1[i] - s2[i]);
-		else if (s1[i] < s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	return (0);
-}
-
-void	swap(char **s1, char **s2)
+void	ft_swap(char **s1, char **s2)
 {
 	char	*tmp;
 
@@ -47,29 +45,28 @@ void	swap(char **s1, char **s2)
 	*s2 = tmp;
 }
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
 	int	i;
 	int	j;
 
 	i = 1;
-	while (i < argc - 1)
+	while (i < ac - 1)
 	{
 		j = i + 1;
-		while (j < argc)
+		while (j < ac)
 		{
-			if (cmp(argv[i], argv[j]) > 0)
-				swap(&argv[i], &argv[j]);
+			if (ft_strcmp(av[i], av[j]) > 0)
+				ft_swap(&av[i], &av[j]);
 			j++;
 		}
 		i++;
 	}
 	i = 1;
-	while (i < argc)
+	while (i < ac)
 	{
-		ft_putstr(argv[i]);
+		ft_putstr(av[i++]);
 		write(1, "\n", 1);
-		i++;
 	}
 	return (0);
 }

@@ -9,42 +9,37 @@
 /*   Updated: 2024/07/31 23:34:59 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <stdlib.h>
 
 int	*ft_range(int min, int max)
 {
-	int	j;
+	int	i;
 	int	*arr;
 
+	i = 0;
+	arr = NULL;
 	if (min >= max)
-		return (0);
-	j = 0;
-	arr = (int *)malloc((max - min) * 4);
+		return (NULL);
+	arr = malloc(sizeof(int) * (max - min));
 	if (!arr)
-		return (0);
-	while (j < (max - min))
-	{
-		arr[j] = min + j;
-		j++;
-	}
+		return (NULL);
+	while (min < max)
+		arr[i++] = min++;
 	return (arr);
 }
-/*#include<stdio.h>
-int	main(void)
-{
-	int	i = 0;
-	int	min = -10,max = -9;
-	int	*arr = ft_range(min, max);
-	
-	if (!arr)
-		return (0);
-	while (i < (max - min))
-	{
-		printf("%d", arr[i]);
-		i++;
-	}
-	free (arr);
-	return (0);
-}
-*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include<stdio.h>
+// int	main(void)
+// {
+// 	int	i = 0;
+// 	int	min = 0 , max = 10;
+// 	int	*arr = ft_range(min, max);
+// 	if (!arr)
+// 		return (1);
+// 	printf("The range from min to (max - 1)\n\t");
+// 	while (i < (max - min))
+// 		printf("%d ", arr[i++]);
+// 	printf("\n");
+// 	free(arr);
+// 	return (0);
+// }

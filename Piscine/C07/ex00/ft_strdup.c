@@ -9,36 +9,44 @@
 /*   Updated: 2024/07/31 23:46:41 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <stdlib.h>
+
+int	ft_strlen(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str[len] != '\0')
+		len++;
+	return (len);
+}
 
 char	*ft_strdup(char *src)
 {
 	int		i;
-	char	*dupl;
+	char	*dup;
 
 	i = 0;
-	while (src[i] != '\0')
-		i++;
-	dupl = (char *)malloc(i * 1);
-	i = 0;
-	if (!dupl)
-		return (0);
+	dup = malloc(ft_strlen(src) + 1);
+	if (!dup)
+		return (NULL);
 	while (src[i] != '\0')
 	{
-		dupl[i] = src[i];
+		dup[i] = src[i];
 		i++;
 	}
-	dupl[i] = '\0';
-	return (dupl);
+	dup[i] = '\0';
+	return (dup);
 }
-/*#include<stdio.h>
-int	main()
-{
-	char *dupl = ft_strdup("HELLO");
-	if (!dupl)
-		return (0);
-	printf("%s", dupl);
-	free (dupl);
-	return (0);
-}*/
+// MAIN IS ONLY ADDED FOR TESTING, DO NOT PUSH IT TO PROJECT REPO AT CAMPUS
+// #include<stdio.h>
+// int	main()
+// {
+// 	char *str = "notdup";
+// 	printf("String before duplicate: %s\n", str);
+// 	str = ft_strdup("dupped str");
+// 	if (!str)
+// 		return (1);
+// 	printf("String after duplicate: %s\n", str);
+// 	free(str);
+// }

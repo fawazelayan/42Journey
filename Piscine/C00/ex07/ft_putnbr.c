@@ -9,7 +9,6 @@
 /*   Updated: 2024/07/20 05:03:41 by felayan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <unistd.h>
 
 void	ft_putchar(char c)
@@ -44,4 +43,3 @@ void	ft_putnbr(int n)
 // 		ft_putnbr(x);
 // 		printf("\n");
 // 	}
-// }

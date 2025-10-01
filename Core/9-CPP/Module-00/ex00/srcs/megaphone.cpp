@@ -6,7 +6,7 @@ namespace mine	// Demonstrates understanding of namespaces.
 {
 	std::string	toupper(std::string str);
 }
-// TRY std::toupper(static_cast<unsigned char>str[i]) at campus
+
 std::string	mine::toupper(std::string str)	// My own toupper function.
 {
 	for(unsigned int i = 0; str[i]; i++)

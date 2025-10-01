@@ -119,8 +119,7 @@ void	Account::displayStatus(void) const
 	std::cout << "index:" << _accountIndex << ";"
 		<< "amount:" << _amount << ";"
 		<< "deposits:" << _nbDeposits << ";"
-		<< "withdrawals:" << _nbWithdrawals << ";"
-		<< std::endl;
+		<< "withdrawals:" << _nbWithdrawals << std::endl;
 }
 
 Account::~Account(void)

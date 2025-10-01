@@ -6,9 +6,9 @@
 class PhoneBook
 {
 	private:
-		Contact contacts[8];
-		int	count;
-		int	next;
+		Contact	contacts[8];
+		int		count;
+		int		next;
 	public:
 		// Constructor
 		PhoneBook();
@@ -16,6 +16,10 @@ class PhoneBook
 		// Command functions
 		int searchContact(void) const;
 		int addContact(void);
+
+		// Getters
+		int	getCount(void) const;
+		int getNext(void) const;
 };
 
 #endif

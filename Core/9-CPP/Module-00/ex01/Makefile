@@ -28,15 +28,19 @@ RM		=	rm -rf
 #  ========================  #
 #		FILES AND PATHS		 #
 #  ========================  #
-SRCS	=	srcs/Contact.cpp srcs/PhoneBook.cpp srcs/Utils.cpp \
-			srcs/main.cpp
+SRCS	= \
+		srcs/PhoneBook.cpp \
+		srcs/Contact.cpp \
+		srcs/Utils.cpp \
+		srcs/main.cpp
+
 OBJS	=	$(patsubst $(SRCS_DR)/%.cpp,$(OBJS_DR)/%.o,$(SRCS))
 
 #  ========================  #
 #	   COMPILATION RULES	 #
 #  ========================  #
-CPP			=	c++
-CPPFLAGS	=	-Wall -Wextra -Werror -I$(INC_DR) -std=c++98
+CXX			=	c++
+CXXFLAGS	=	-Wall -Wextra -Werror -I$(INC_DR) -std=c++98
 
 #  ========================  #
 #			RULES			 #
@@ -50,7 +54,7 @@ re		:	fclean all
 # Compile .o files into objs/
 $(OBJS_DR)/%.o	:	$(SRCS_DR)/%.cpp
 	@mkdir -p $(dir $@)
-	@$(CPP) $(CPPFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 #  ========================  #
 #		  BUILDING			 #
@@ -61,7 +65,7 @@ $(NAME)		:	$(OBJS)
 	else \
 		echo "$(GREEN)\n🔄 Rebuilding everything...$(RESET)\n"; \
 	fi
-	@$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 #  ========================  #
 #		  CLEANING			 #

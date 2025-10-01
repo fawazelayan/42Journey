@@ -10,7 +10,7 @@ class	Contact
 		std::string	phoneNumber;
 		std::string	firstName;
 		std::string	lastName;
-		std::string	nickName;
+		std::string	nickname;
 	public:
 		// Setters
 		void setDarkestSecret(const std::string& secret);

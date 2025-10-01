@@ -1,9 +1,10 @@
 #ifndef UTILS_HPP
 # define UTILS_HPP
 
-# include <iostream>
-# include <iomanip>
-# include <string>
+# include <iostream> // cout
+# include <iomanip> // setw()
+# include <string> // string
+# include <cctype> // isdigit, isspace
 
 # define RED	"\033[1;31m"
 # define GRN	"\033[1;32m"
@@ -20,9 +21,9 @@ void	drawTable(const int index,
 					const std::string& first, const std::string& last,
 					const std::string& nick);
 
-int	searchValidIndex(int& index, const int count);
-
-std::string	addValidInfo(std::string prompt);
+std::string	addValidInfo(const std::string prompt, int& status);
 std::string	truncate(const std::string& str);
+
+int	searchValidIndex(int& index, const int count);
 
 #endif

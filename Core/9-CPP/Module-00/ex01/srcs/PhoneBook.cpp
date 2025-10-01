@@ -3,33 +3,53 @@
 
 PhoneBook::PhoneBook() : count(0), next(0) {}
 
+int	PhoneBook::getCount(void) const
+{
+	return this -> count;
+}
+
+int	PhoneBook::getNext(void) const
+{
+	return this -> next;
+}
+
 int	PhoneBook::addContact(void)
 {
-	std::string info;
+	std::string	info;
+	int			status = 0;
 
-	std::cout << std::endl;
-	info = addValidInfo("Enter first name: ");
+	info = addValidInfo("Enter first name: ", status);
 	if (info == "EXIT")
+		return -1;
+	if (status == 1)
 		return 1;
 	contacts[next].setFirstName(info);
 
-	info = addValidInfo("Enter last name: ");
+	info = addValidInfo("Enter last name: ", status);
 	if (info == "EXIT")
+		return -1;
+	if (status == 1)
 		return 1;
 	contacts[next].setLastName(info);
 
-	info = addValidInfo("Enter nickname: ");
+	info = addValidInfo("Enter nickname: ", status);
 	if (info == "EXIT")
+		return -1;
+	if (status == 1)
 		return 1;
 	contacts[next].setNickname(info);
 
-	info = addValidInfo("Enter phone number: ");
+	info = addValidInfo("Enter phone number: ", status);
 	if (info == "EXIT")
+		return -1;
+	if (status == 1)
 		return 1;
 	contacts[next].setPhoneNumber(info);
 
-	info = addValidInfo("Enter darkest secret: ");
+	info = addValidInfo("Enter darkest secret: ", status);
 	if (info == "EXIT")
+		return -1;
+	if (status == 1)
 		return 1;
 	contacts[next].setDarkestSecret(info);
 
@@ -45,13 +65,12 @@ int	PhoneBook::addContact(void)
 
 int	PhoneBook::searchContact(void) const
 {
-	int index = -1;
-	std::string input;
+	int	index = -1;
+	int	status = 0;
 
 	if (!count)
 	{
-		std::cout << RED <<"\nPhone book is empty, nothing to display.\n"
-			<< RST;
+		std::cout << RED <<"Phone book is empty, nothing to display.\n" << RST;
 		return 0;
 	}
 
@@ -62,8 +81,9 @@ int	PhoneBook::searchContact(void) const
 					contacts[i].getNickname());
 	}
 
-	if (searchValidIndex(index, count))
-		return 1;
+	status = searchValidIndex(index, count);
+	if (status)
+		return status;
 
 	displayInfo(contacts[index].getFirstName(), contacts[index].getLastName(),
 				contacts[index].getNickname(), contacts[index].getPhoneNumber(),

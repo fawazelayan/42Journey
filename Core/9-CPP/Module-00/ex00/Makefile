@@ -29,13 +29,13 @@ RM		=	rm -rf
 #		FILES AND PATHS		 #
 #  ========================  #
 SRCS	=	srcs/megaphone.cpp
-OBJS	=	$(patsubst $(SRCS_DR)/%.c,$(OBJS_DR)/%.o,$(SRCS))
+OBJS	=	$(patsubst $(SRCS_DR)/%.cpp,$(OBJS_DR)/%.o,$(SRCS))
 
 #  ========================  #
 #	   COMPILATION RULES	 #
 #  ========================  #
-CPP			=	c++
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
+CXX			=	c++
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
 #  ========================  #
 #			RULES			 #
@@ -49,7 +49,7 @@ re		:	fclean all
 # Compile .o files into objs/
 $(OBJS_DR)/%.o	:	$(SRCS_DR)/%.cpp
 	@mkdir -p $(dir $@)
-	@$(CPP) $(CPPFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 #  ========================  #
 #		  BUILDING			 #
@@ -60,7 +60,7 @@ $(NAME)		:	$(OBJS)
 	else \
 		echo "$(GREEN)\n🔄 Rebuilding everything...$(RESET)\n"; \
 	fi
-	@$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 #  ========================  #
 #		  CLEANING			 #
@@ -79,6 +79,6 @@ fclean	:	clean
 
 #  ========================  #
 #							 #
-#  	     -*- END -*-		 #
+#		 -*- END -*-		 #
 #							 #
-#  ========================	 #
+#  ========================  #

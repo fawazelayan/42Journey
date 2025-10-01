@@ -1,6 +1,6 @@
 #include "Contact.hpp"
 
-void	Contact::setFirstName(const std::string& first)
+void Contact::setFirstName(const std::string& first)
 {
 	this -> firstName = first;
 }
@@ -12,7 +12,7 @@ void Contact::setLastName(const std::string& last)
 
 void Contact::setNickname(const std::string& nick)
 {
-	this -> nickName = nick;
+	this -> nickname = nick;
 }
 
 void Contact::setPhoneNumber(const std::string& num)
@@ -36,7 +36,7 @@ std::string Contact::getLastName(void) const
 }
 std::string Contact::getNickname(void) const
 {
-	return this -> nickName;
+	return this -> nickname;
 }
 
 std::string Contact::getPhoneNumber(void) const

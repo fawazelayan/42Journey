@@ -33,8 +33,7 @@ std::string	addValidInfo(const std::string prompt, int& status)
 				<< "\nField can't be empty or use reserved commands"
 				<< " (ADD or SEARCH), "
 				<< "please re-enter "
-				<< prompt.substr(6, prompt.length() - 8)
-				<< ".\n\n" << RST;
+				<< prompt.substr(6, prompt.length() - 8) << ".\n\n" << RST;
 		}
 	}
 	return info;

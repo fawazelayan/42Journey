@@ -2,49 +2,49 @@
 
 void Contact::setFirstName(const std::string& first)
 {
-	this -> firstName = first;
+	firstName = first;
 }
 
 void Contact::setLastName(const std::string& last)
 {
-	this -> lastName  = last;
+	lastName  = last;
 }
 
 void Contact::setNickname(const std::string& nick)
 {
-	this -> nickname = nick;
+	nickname = nick;
 }
 
 void Contact::setPhoneNumber(const std::string& num)
 {
-	this -> phoneNumber = num;
+	phoneNumber = num;
 }
 
 void Contact::setDarkestSecret(const std::string& secret)
 {
-	this -> darkestSecret = secret;
+	darkestSecret = secret;
 }
 
 std::string Contact::getFirstName(void) const
 {
-	return this -> firstName;
+	return firstName;
 }
 
 std::string Contact::getLastName(void) const
 {
-	return this -> lastName;
+	return lastName;
 }
 std::string Contact::getNickname(void) const
 {
-	return this -> nickname;
+	return nickname;
 }
 
 std::string Contact::getPhoneNumber(void) const
 {
-	return this -> phoneNumber;
+	return phoneNumber;
 }
 
 std::string Contact::getDarkestSecret(void) const
 {
-	return this -> darkestSecret;
+	return darkestSecret;
 }

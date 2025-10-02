@@ -5,12 +5,12 @@ PhoneBook::PhoneBook() : count(0), next(0) {}
 
 int	PhoneBook::getCount(void) const
 {
-	return this -> count;
+	return count;
 }
 
 int	PhoneBook::getNext(void) const
 {
-	return this -> next;
+	return next;
 }
 
 int	PhoneBook::addContact(void)

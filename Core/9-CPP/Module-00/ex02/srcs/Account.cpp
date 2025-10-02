@@ -2,6 +2,7 @@
 #include <iostream>
 #include <ctime>
 #include <iomanip>
+
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
@@ -29,6 +30,11 @@ int	Account::getNbWithdrawals(void)
 	return _totalNbWithdrawals;
 }
 
+int	Account::checkAmount (void) const
+{
+	return _amount;
+}
+
 void	Account::_displayTimestamp(void)
 {
 	std::time_t now = std::time(NULL);
@@ -38,7 +44,7 @@ void	Account::_displayTimestamp(void)
 	std::cout << std::setw(2) << std::setfill('0')
 		<< timeinfo -> tm_mon + 1;
 	std::cout << std::setw(2) << std::setfill('0')
-		<< timeinfo-> tm_mday << "_";
+		<< timeinfo -> tm_mday << "_";
 	std::cout << std::setw(2) << std::setfill('0')
 		<< timeinfo -> tm_hour;
 	std::cout << std::setw(2) << std::setfill('0')
@@ -106,11 +112,6 @@ bool	Account::makeWithdrawal(int withdrawal)
 		<< "amount:" << _amount << ";"
 		<< "nb_withdrawals:" << _nbWithdrawals << std::endl;
 	return true;
-}
-
-int	Account::checkAmount (void) const
-{
-	return _amount;
 }
 
 void	Account::displayStatus(void) const

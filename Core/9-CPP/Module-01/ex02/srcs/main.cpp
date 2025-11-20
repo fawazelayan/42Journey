@@ -4,13 +4,18 @@
 int	main(void)
 {
 	std::string str = "HI THIS IS BRAIN";
-	std::string	&strRef = str;
-	std::string	*strPtr;
+	std::string	&strREF = str;
+	std::string	*strPTR;
 
-	strPtr = &str;
+	strPTR = &str;
 
-	std::cout << '\n' << &str << '\n' << strPtr << '\n' << &strRef << "\n\n";
-	std::cout << str << '\n' << *strPtr << '\n' << strRef << "\n\n";
+	std::cout << '\n' << &str << '\n'
+					<< strPTR << '\n'
+					<< &strREF << "\n";
+
+	std::cout << '\n' << str << '\n'
+					<< *strPTR << '\n'
+					<< strREF << "\n\n";
 
 	return 0;
 }

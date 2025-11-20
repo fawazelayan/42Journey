@@ -15,7 +15,7 @@ RESET	=	\033[0m
 #  ========================  #
 #	    FILE STRUCTURE		 #
 #  ========================  #
-NAME		=	zombieHorde
+NAME		=	harl
 
 SRCS_DR		=	srcs
 OBJS_DR		=	objs
@@ -29,9 +29,8 @@ RM		=	rm -rf
 #		FILES AND PATHS		 #
 #  ========================  #
 SRCS	= \
-		srcs/zombieHorde.cpp \
-		srcs/Zombie.cpp \
-		srcs/main.cpp
+		srcs/main.cpp \
+		srcs/Harl.cpp
 
 OBJS	=	$(patsubst $(SRCS_DR)/%.cpp,$(OBJS_DR)/%.o,$(SRCS))
 
@@ -60,7 +59,7 @@ $(OBJS_DR)/%.o	:	$(SRCS_DR)/%.cpp
 #  ========================  #
 $(NAME)		:	$(OBJS)
 	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
-		echo "$(PURPLE)\n🔗 Creating zombie horde executable...\n$(RESET)"; \
+		echo "$(PURPLE)\n🔗 Creating harl executable...\n$(RESET)"; \
 	else \
 		echo "$(GREEN)\n🔄 Rebuilding everything...$(RESET)\n"; \
 	fi

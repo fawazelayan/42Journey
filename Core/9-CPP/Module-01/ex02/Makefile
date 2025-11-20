@@ -1,6 +1,6 @@
 #  ========================  #
 #							 #
-#  	   -*- MODULE-00 -*-	 #
+#  	   -*- MODULE-01 -*-	 #
 #							 #
 #  ========================  #
 
@@ -37,7 +37,7 @@ OBJS	=	$(patsubst $(SRCS_DR)/%.cpp,$(OBJS_DR)/%.o,$(SRCS))
 #	   COMPILATION RULES	 #
 #  ========================  #
 CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -I$(INC_DR) -std=c++98
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
 #  ========================  #
 #			RULES			 #

@@ -2,12 +2,12 @@
 
 Zombie::Zombie() : name("emptyName")
 {
-	std::cout << "\nDefault constructor called.";
+	std::cout << "Default constructor called.\n";
 }
 
 Zombie::Zombie(std::string zombieName) : name(zombieName)
 {
-	std::cout << '\n' << name << " has been created.\n";
+	std::cout << name << " has been created.\n";
 }
 
 Zombie::~Zombie()

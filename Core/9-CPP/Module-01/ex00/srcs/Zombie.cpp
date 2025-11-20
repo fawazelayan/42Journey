@@ -1,6 +1,9 @@
 #include "Zombie.hpp"
 
-Zombie::Zombie() : name("emptyName") {}
+Zombie::Zombie() : name("emptyName")
+{
+	std::cout << "Default ocnstructor called.\n";
+}
 
 Zombie::Zombie(std::string zombieName) : name(zombieName)
 {

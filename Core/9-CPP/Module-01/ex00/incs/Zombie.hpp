@@ -9,13 +9,16 @@ class Zombie
 	private:
 		std::string name;
 	public:
-	// Constructor and destructor
+	// Constructors and Destructor
 		Zombie(std::string name);
 		Zombie();
 		~Zombie();
 
+	// Setters and Getters
 		std::string getName(void) const;
 		void setName(std::string name);
+
+	// Other member functions
 		void announce(void) const;
 };
 

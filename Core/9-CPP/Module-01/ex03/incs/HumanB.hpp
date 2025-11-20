@@ -1,27 +1,27 @@
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#ifndef HUMANB_HPP
+# define HUMANB_HPP
 
-#include <string>
+#include "Weapon.hpp"
 #include <iostream>
+#include <string>
 
-class Zombie
+class HumanB
 {
 	private:
 		std::string name;
+		Weapon *weapon;
 	public:
+
 	// Constructors and Destructor
-		Zombie(std::string name);
-		Zombie();
-		~Zombie();
+		HumanB(std::string nm);
+		~HumanB();
 
 	// Setters and Getters
 		std::string getName(void) const;
 		void setName(std::string name);
-
+		void setWeapon(Weapon &weapon);
 	// Other member functions
-		void announce(void) const;
+		void attack() const;
 };
-
-Zombie*	zombieHorde(int N, std::string name);
 
 #endif

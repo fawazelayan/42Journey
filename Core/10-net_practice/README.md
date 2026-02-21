@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by felayan.
+This project has been created as part of the 42 curriculum by felayan.
 
 # Net Practice
 
@@ -8,10 +8,10 @@ The project simulates how data packets travel through routers, switches, and the
 
 ## Instructions
 How to run:
-* 1. Download the net_practice.1.9.tgz file provided by 42.
-* 2. Extract the file then enter the exctracted folder.
-* 3. Run this command "sh run.sh"
-* 4. Navigate to http://localhost:49242 in your web browser.
+1. Download the net_practice.1.9.tgz file provided by 42.
+2. Extract the file then enter the exctracted folder.
+3. Run this command "sh run.sh"
+4. Navigate to http://localhost:49242 in your web browser.
 
 How to Export:
 
@@ -31,4 +31,4 @@ Networking Concepts Studied
 * OSI Model: Specifically focusing on Layer 3 (Network Layer).
 
 AI Usage
-I used Gemini when I got a confusing error to understand where I was mistaken then tried to fix itby myself.
+* I used Gemini when I got a confusing error to understand where I was mistaken then tried to fix itby myself.

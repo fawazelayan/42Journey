@@ -30,5 +30,6 @@ Networking Concepts Studied
 * Routing Tables: Defining the next hop for specific destination networks to ensure two-way communication.
 * OSI Model: Specifically focusing on Layer 3 (Network Layer).
 
-AI Usage
-* I used Gemini when I got a confusing error to understand where I was mistaken then tried to fix itby myself.
+## AI Usage
+* I used Gemini when I got a confusing error to understand where I was mistaken then tried to fix it by myself.
+* Helping me write the README.

@@ -15,7 +15,7 @@ RESET	=	\033[0m
 #  ========================  #
 #	    FILE STRUCTURE		 #
 #  ========================  #
-NAME		=	fire
+NAME		=	abstract
 
 SRCS_DR		=	srcs
 OBJS_DR		=	objs
@@ -62,7 +62,7 @@ $(OBJS_DR)/%.o	:	$(SRCS_DR)/%.cpp
 #  ========================  #
 $(NAME)		:	$(OBJS)
 	@if [ "$(MAKECMDGOALS)" != "re" ]; then \
-		echo "$(PURPLE)\n🔗 Creating fire executable...\n$(RESET)"; \
+		echo "$(PURPLE)\n🔗 Creating abstract executable...\n$(RESET)"; \
 	else \
 		echo "$(GREEN)\n🔄 Rebuilding everything...$(RESET)\n"; \
 	fi

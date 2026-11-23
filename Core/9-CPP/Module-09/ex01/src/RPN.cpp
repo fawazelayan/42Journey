@@ -16,7 +16,7 @@ RPN& RPN::operator=(const RPN& other)
 
 RPN::~RPN() {}
 
-// read tokens left to right and compute the result with the stack
+// compute the expression
 long RPN::evaluate(const std::string& expression)
 {
 	std::istringstream stream(expression);

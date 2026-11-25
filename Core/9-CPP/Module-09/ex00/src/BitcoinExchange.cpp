@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
@@ -105,6 +106,6 @@ void BitcoinExchange::processLine(const std::string& line) const
 	else
 	{
 		--it;
-		std::cout << date << " => " << value << " = " << value * it->second << std::endl;
+		std::cout << std::setprecision(10) << date << " => " << value << " = " << value * it->second << std::endl;
 	}
 }

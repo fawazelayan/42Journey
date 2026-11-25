@@ -1,4 +1,5 @@
 #include "RPN.hpp"
+#include <climits>
 #include <sstream>
 #include <stdexcept>
 
@@ -17,7 +18,7 @@ RPN& RPN::operator=(const RPN& other)
 RPN::~RPN() {}
 
 // compute the expression
-long RPN::evaluate(const std::string& expression)
+int RPN::evaluate(const std::string& expression)
 {
 	std::istringstream stream(expression);
 	std::string token;
@@ -34,20 +35,25 @@ long RPN::evaluate(const std::string& expression)
 		{
 			if (numbers.size() < 2)
 				throw std::runtime_error("Error");
-			long num2 = numbers.top();
+			double num2 = numbers.top();
 			numbers.pop();
-			long num1 = numbers.top();
+			double num1 = numbers.top();
 			numbers.pop();
+			double result;
 			if (token == "+")
-				numbers.push(num1 + num2);
+				result = num1 + num2;
 			else if (token == "-")
-				numbers.push(num1 - num2);
+				result = num1 - num2;
 			else if (token == "*")
-				numbers.push(num1 * num2);
+				result = num1 * num2;
 			else if (num2 == 0)
 				throw std::runtime_error("Error");
 			else
-				numbers.push(num1 / num2);
+				result = num1 / num2;
+			// the result must fit in an int
+			if (result > INT_MAX || result < INT_MIN)
+				throw std::runtime_error("Error");
+			numbers.push(static_cast<int>(result));
 		}
 		else
 			throw std::runtime_error("Error");

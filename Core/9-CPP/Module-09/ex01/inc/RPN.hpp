@@ -8,7 +8,7 @@
 class RPN
 {
 	private:
-		std::stack<long, std::list<long> >	numbers;
+		std::stack<int, std::list<int> >	numbers;
 
 	public:
 		// Constructors & Destructor
@@ -18,7 +18,7 @@ class RPN
 		~RPN();
 
 		// RPN Operations
-		long evaluate(const std::string& expression);
+		int evaluate(const std::string& expression);
 };
 
 #endif

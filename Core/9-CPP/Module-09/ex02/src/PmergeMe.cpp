@@ -63,24 +63,25 @@ void PmergeMe::mergeInsertVector(const std::vector<int>& arr, std::vector<size_t
 	// 3. start the chain
 	std::vector<size_t> chain(1, partner[bigs[0]]);
 	chain.insert(chain.end(), bigs.begin(), bigs.end());
-	// 4. insert the rest in Jacobsthal order
+	// 4. insert the rest in Jacobsthal order (the odd one out goes last)
+	size_t pend = bigs.size() + pos.size() % 2;
 	size_t prev = 1;
 	size_t curr = 3;
-	while (prev < bigs.size())
+	while (prev < pend)
 	{
-		for (size_t k = std::min(curr, bigs.size()); k > prev; k--)
+		size_t top = std::min(curr, pend);
+		for (size_t k = top; k > prev; k--)
 		{
-			size_t big = bigs[k - 1];
-			size_t small = partner[big];
-			size_t end = lowerPosVector(arr, chain, arr[big], chain.size());
-			chain.insert(chain.begin() + lowerPosVector(arr, chain, arr[small], end), small);
+			size_t small = pos.back();
+			if (k <= bigs.size())
+				small = partner[bigs[k - 1]];
+			// the whole group only needs the first top + prev - 1 slots
+			chain.insert(chain.begin() + lowerPosVector(arr, chain, arr[small], top + prev - 1), small);
 		}
 		size_t next = curr + 2 * prev;
 		prev = curr;
 		curr = next;
 	}
-	if (pos.size() % 2)
-		chain.insert(chain.begin() + lowerPosVector(arr, chain, arr[pos.back()], chain.size()), pos.back());
 	pos = chain;
 }
 
@@ -135,23 +136,24 @@ void PmergeMe::mergeInsertDeque(const std::deque<int>& arr, std::deque<size_t>& 
 	// 3. start the chain
 	std::deque<size_t> chain = bigs;
 	chain.push_front(partner[bigs[0]]);
-	// 4. insert the rest in Jacobsthal order
+	// 4. insert the rest in Jacobsthal order (the odd one out goes last)
+	size_t pend = bigs.size() + pos.size() % 2;
 	size_t prev = 1;
 	size_t curr = 3;
-	while (prev < bigs.size())
+	while (prev < pend)
 	{
-		for (size_t k = std::min(curr, bigs.size()); k > prev; k--)
+		size_t top = std::min(curr, pend);
+		for (size_t k = top; k > prev; k--)
 		{
-			size_t big = bigs[k - 1];
-			size_t small = partner[big];
-			size_t end = lowerPosDeque(arr, chain, arr[big], chain.size());
-			chain.insert(chain.begin() + lowerPosDeque(arr, chain, arr[small], end), small);
+			size_t small = pos.back();
+			if (k <= bigs.size())
+				small = partner[bigs[k - 1]];
+			// the whole group only needs the first top + prev - 1 slots
+			chain.insert(chain.begin() + lowerPosDeque(arr, chain, arr[small], top + prev - 1), small);
 		}
 		size_t next = curr + 2 * prev;
 		prev = curr;
 		curr = next;
 	}
-	if (pos.size() % 2)
-		chain.insert(chain.begin() + lowerPosDeque(arr, chain, arr[pos.back()], chain.size()), pos.back());
 	pos = chain;
 }
